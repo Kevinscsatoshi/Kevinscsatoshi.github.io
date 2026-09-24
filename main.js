@@ -133,17 +133,23 @@
   }
 
   /* ---------- 个人经历 ---------- */
-  const row = (year, title, sub, links, titleAttr = "") => `<li class="row ${rv()}">
+  // 官方 logo（单个路径或数组）
+  const logos = (src, alt) =>
+    `<div class="row-logo">${[].concat(src || []).map((u) => `<img src="${esc(u)}" alt="${esc(alt)}" loading="lazy" />`).join("")}</div>`;
+  const row = (year, title, sub, links, titleAttr = "", logo = "") => `<li class="row ${rv()}">
       <span class="year mono">${esc(year)}</span>
+      ${logo}
       <div><h3${titleAttr}>${esc(title)}</h3>${sub ? `<p class="row-sub">${sub}</p>` : ""}</div>
       <div class="plinks mono">${links}</div>
     </li>`;
 
   function renderExperience() {
     $("#profile-links").innerHTML = linkList(S.profileLinks);
-    $("#timeline").innerHTML = S.timeline.map((x) => row(t(x.year), t(x.title), esc(t(x.org)), x.url ? ext(x.url, domain(x.url).replace(/^www\./, "")) : "")).join("");
+    $("#timeline").innerHTML = S.timeline
+      .map((x) => row(t(x.year), t(x.title), esc(t(x.org)), x.url ? ext(x.url, domain(x.url).replace(/^www\./, "")) : "", "", logos(x.logo, t(x.org))))
+      .join("");
     $("#projects-list").innerHTML = S.projects
-      .map((p) => row(p.year, t(p.title), `<span class="venue mono">${esc(t(p.venue))}</span> — ${esc(t(p.desc))}`, linkList(p.links), enAttr(p.title)))
+      .map((p) => row(p.year, t(p.title), `<span class="venue mono">${esc(t(p.venue))}</span> — ${esc(t(p.desc))}`, linkList(p.links), enAttr(p.title), logos(p.logo, t(p.venue))))
       .join("");
   }
 
