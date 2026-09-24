@@ -197,6 +197,7 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(2.8rem, 8vw, 6.5rem); line-height: 1; letter-spacing: -0.02em;
 }
+.page-title .alt { margin-left: 0.3em; }
 .page-intro { max-width: 640px; margin-top: 24px; color: var(--muted); font-size: 1.02rem; }
 .page-intro:empty { display: none; }
 .sub-head { color: var(--muted); margin: 64px 0 8px; }
