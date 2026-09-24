@@ -63,23 +63,30 @@
   const rv = () => (revealed ? "reveal in" : "reveal");
 
   /* ---------- 共用：顶栏 + 页脚 ---------- */
+  // 规范路径：固定用 .html（与 sitemap / hreflang 一致，避免 /experience 这类无扩展名重复网址）
+  const CANON_PATH = PAGE === "home" ? "/" : `/${PAGE}.html`;
+  // 站内链接带上当前语言（英文不带参数），让搜索引擎能顺着链接找到中文 / 日文版本
+  const withLang = (h, l = lang) => (l === "en" ? h : `${h}${h.includes("?") ? "&" : "?"}lang=${l}`);
+  const langHref = (l) => withLang(PAGE === "post" ? `post.html${location.hash}` : CANON_PATH.replace(/^\//, "./"), l)
+    .replace(/(#[^?]*)(\?lang=\w+)$/, "$2$1");
+
   function renderNav() {
     $("#site-nav").innerHTML = `
-      <a href="./" class="logo" aria-label="${esc(ui("site.title"))}">${LOGO}</a>
-      <nav>${PAGES.map((p) => `<a href="${p.href}"${PAGE === p.key || (PAGE === "post" && p.key === "blog") ? ' class="active" aria-current="page"' : ""}>${esc(ui(`nav.${p.key}`))}</a>`).join("")}</nav>
+      <a href="${withLang("./")}" class="logo" aria-label="${esc(ui("site.title"))}">${LOGO}</a>
+      <nav>${PAGES.map((p) => `<a href="${withLang(p.href)}"${PAGE === p.key || (PAGE === "post" && p.key === "blog") ? ' class="active" aria-current="page"' : ""}>${esc(ui(`nav.${p.key}`))}</a>`).join("")}</nav>
       <div class="nav-right">
         <div class="lang" role="group" aria-label="Language / 语言 / 言語">
-          <button type="button" data-lang="zh" lang="zh-CN" aria-label="中文">中</button>
-          <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
-          <button type="button" data-lang="ja" lang="ja" aria-label="日本語">日</button>
+          <a href="${langHref("zh")}" data-lang="zh" hreflang="zh-CN" lang="zh-CN" aria-label="中文">中</a>
+          <a href="${langHref("en")}" data-lang="en" hreflang="en" lang="en" aria-label="English">EN</a>
+          <a href="${langHref("ja")}" data-lang="ja" hreflang="ja" lang="ja" aria-label="日本語">日</a>
         </div>
         <span class="clock mono" id="clock"></span>
       </div>`;
-    $$(".lang button").forEach((b) => {
+    $$(".lang a").forEach((b) => {
       const on = b.dataset.lang === lang;
       b.classList.toggle("active", on);
-      b.setAttribute("aria-pressed", on);
-      b.addEventListener("click", () => setLang(b.dataset.lang));
+      if (on) b.setAttribute("aria-current", "true");
+      b.addEventListener("click", (e) => { e.preventDefault(); setLang(b.dataset.lang); });
     });
     tick();
   }
@@ -96,13 +103,12 @@
     document.documentElement.lang = HTML_LANG[lang];
     const pageTitle = PAGES.some((p) => p.key === PAGE) ? ui(`pages.${PAGE}.title`) : "";
     if (PAGE !== "post") document.title = pageTitle ? `${pageTitle} — ${ui("site.title")}` : ui("site.title");
-    $('meta[name="description"]')?.setAttribute("content", PAGE === "home" ? ui("site.description") : ui(`pages.${PAGE}.intro`) || ui("site.description"));
+    $('meta[name="description"]')?.setAttribute("content", PAGE === "home" ? ui("site.description") : ui(`pages.${PAGE}.desc`) || ui(`pages.${PAGE}.intro`) || ui("site.description"));
     // 规范网址：英文 = 不带参数，中文 / 日文 = ?lang=zh|ja（与 sitemap.xml 和 hreflang 对应）
     if (PAGE !== "post") {
-      const path = location.pathname.replace(/index\.html$/, "");
       let link = $('link[rel="canonical"]');
       if (!link) { link = document.createElement("link"); link.rel = "canonical"; document.head.appendChild(link); }
-      link.href = `${location.origin}${path}${lang === "en" ? "" : `?lang=${lang}`}`;
+      link.href = `${location.origin}${CANON_PATH}${lang === "en" ? "" : `?lang=${lang}`}`;
     }
     $$("[data-i18n]").forEach((el) => (el.textContent = ui(el.dataset.i18n)));
     $$("[data-i18n-html]").forEach((el) => (el.innerHTML = ui(el.dataset.i18nHtml)));
@@ -112,14 +118,14 @@
   const emoji = (i) => S.roleEmoji?.[i % (S.roleEmoji.length || 1)] ?? "";
 
   function renderHome() {
-    // 名字末尾跟一个轮换的 emoji
+    // 名字末尾跟一个轮换的 emoji（由 CSS ::after 画出，不计入标题文字，搜索引擎读到的就是干净的名字）
     $("#hero-title").innerHTML = ui("hero.name").replace(
       /<\/span>$/,
-      `<span class="emo" id="role-emo" aria-hidden="true">${emoji(0)}</span></span>`
+      `<span class="emo" id="role-emo" data-emo="${emoji(0)}" aria-hidden="true"></span></span>`
     );
     $("#portrait").src = ver(S.portrait);
     $("#home-index").innerHTML = PAGES.map(
-      (p) => `<li><a href="${p.href}"><span class="label">${esc(ui(`pages.${p.key}.title`))}</span><span class="alt" lang="en">${esc(ui(`pages.${p.key}.alt`))}</span><span class="arrow">→</span></a></li>`
+      (p) => `<li><a href="${withLang(p.href)}"><span class="label">${esc(ui(`pages.${p.key}.title`))}</span><span class="alt" lang="en">${esc(ui(`pages.${p.key}.alt`))}</span><span class="arrow">→</span></a></li>`
     ).join("");
   }
 
@@ -136,7 +142,7 @@
       emo.classList.add("out");
       rotSwap = setTimeout(() => {
         ri = (ri + 1) % n;
-        emo.textContent = emoji(ri);
+        emo.dataset.emo = emoji(ri);
         emo.classList.remove("out");
       }, 350);
     }, 2600);
@@ -195,6 +201,11 @@
 
   function renderPhotos() {
     const list = trips();
+    let robots = $('meta[name="robots"]');
+    if (!list.length) {
+      if (!robots) { robots = document.createElement("meta"); robots.name = "robots"; document.head.appendChild(robots); }
+      robots.content = "noindex";
+    } else robots?.remove();
     if (!list.length) {
       $("#filters").innerHTML = "";
       $("#trips").innerHTML = `<p class="empty mono">${esc(ui("pages.photography.empty"))}</p>`;

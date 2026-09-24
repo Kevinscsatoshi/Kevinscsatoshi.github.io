@@ -12,7 +12,7 @@ window.I18N = {
     nav: { experience: "个人经历", photography: "摄影旅行", projects: "Vibe 项目", blog: "Blog", city: "东京" },
     hero: {
       // 大标题：名字（<em> 部分带米色高光）
-      name: '<span class="line">顾思聪</span><span class="line"><em lang="en">Kevin</em></span>',
+      name: '<span class="line">顾思聪</span> <span class="line"><em lang="en">Kevin</em></span>',
     },
     pages: {
       experience: {
@@ -22,7 +22,7 @@ window.I18N = {
         timeline: "履历",
         selected: "代表项目",
       },
-      photography: { title: "摄影旅行", alt: "Photo & Travel", all: "全部", count: "{n} 张", empty: "照片整理中，敬请期待。" },
+      photography: { title: "摄影旅行", alt: "Photo & Travel", desc: "顾思聪（Kevin Sicong Gu）的摄影与旅行记录。", all: "全部", count: "{n} 张", empty: "照片整理中，敬请期待。" },
       projects: {
         title: "Vibe 项目",
         alt: "Vibe Projects",
@@ -52,7 +52,7 @@ window.I18N = {
     },
     nav: { experience: "Experience", photography: "Photo & Travel", projects: "Vibe Projects", blog: "Blog", city: "Tokyo" },
     hero: {
-      name: '<span class="line"><em>Kevin</em></span><span class="line">Sicong Gu</span>',
+      name: '<span class="line"><em>Kevin</em></span> <span class="line">Sicong Gu</span>',
     },
     pages: {
       experience: {
@@ -62,7 +62,7 @@ window.I18N = {
         timeline: "Timeline",
         selected: "Selected Work",
       },
-      photography: { title: "Photo & Travel", alt: "", all: "All", count: "{n} photos", empty: "Photos coming soon." },
+      photography: { title: "Photo & Travel", alt: "", desc: "Photography and travel by Kevin Sicong Gu.", all: "All", count: "{n} photos", empty: "Photos coming soon." },
       projects: {
         title: "Vibe Projects",
         alt: "",
@@ -92,7 +92,7 @@ window.I18N = {
     },
     nav: { experience: "経歴", photography: "写真と旅", projects: "Vibe プロジェクト", blog: "ブログ", city: "東京" },
     hero: {
-      name: '<span class="line"><ruby>顧<rt>こ</rt></ruby> <ruby>思聡<rt>しそう</rt></ruby></span><span class="line"><em lang="en">Kevin</em></span>',
+      name: '<span class="line"><span class="furi" data-r="こ">顧</span> <span class="furi" data-r="しそう">思聡</span></span> <span class="line"><em lang="en">Kevin</em></span>',
     },
     pages: {
       experience: {
@@ -102,7 +102,7 @@ window.I18N = {
         timeline: "経歴一覧",
         selected: "主な実績",
       },
-      photography: { title: "写真と旅", alt: "Photo & Travel", all: "すべて", count: "{n} 枚", empty: "写真は準備中です。" },
+      photography: { title: "写真と旅", alt: "Photo & Travel", desc: "顧 思聡（Kevin Sicong Gu）の写真と旅の記録。", all: "すべて", count: "{n} 枚", empty: "写真は準備中です。" },
       projects: {
         title: "Vibe プロジェクト",
         alt: "Vibe Projects",

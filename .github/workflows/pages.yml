@@ -26,13 +26,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Stamp asset versions and sitemap date
+      - name: Stamp asset versions
         run: |
           V="${GITHUB_SHA::7}"
           sed -i "s/?v=dev/?v=${V}/g" *.html
-          sed -i "s/__LASTMOD__/$(date -u +%F)/g" sitemap.xml
           grep -o '?v=[0-9a-f]*' index.html | sort -u
-          grep -m1 -o '<lastmod>[^<]*' sitemap.xml
 
       - uses: actions/configure-pages@v6
 

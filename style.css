@@ -112,12 +112,12 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
 .clock { opacity: 0.6; white-space: nowrap; }
 .nav-right { display: flex; align-items: center; gap: 20px; }
 .lang { display: flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; }
-.lang button {
+.lang a {
   padding: 3px 9px; border-radius: 999px; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.04em;
   color: var(--muted); transition: background .2s, color .2s;
 }
-.lang button:hover { color: var(--fg); }
-.lang button.active { background: var(--fg); color: var(--bg); }
+.lang a:hover { color: var(--fg); }
+.lang a.active { background: var(--fg); color: var(--bg); }
 
 /* ---------- 首页 hero ---------- */
 .hero {
@@ -141,11 +141,12 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
   background: linear-gradient(transparent 62%, var(--mark) 62%, var(--mark) 86%, transparent 86%);
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
-/* 日文名字的读音（振り仮名） */
-.hero-title ruby { ruby-position: over; }
-.hero-title rt {
-  font-family: var(--sans); font-size: 0.15em; font-weight: 400;
-  letter-spacing: 0.35em; color: var(--muted); padding-bottom: 0.25em;
+/* 日文名字的读音（振り仮名）：用 ::before 显示，不计入标题文字 */
+.furi { position: relative; display: inline-block; }
+.furi::before {
+  content: attr(data-r); position: absolute; left: 0; right: 0; bottom: 100%;
+  text-align: center; font-family: var(--sans); font-size: 0.15em; font-weight: 400;
+  letter-spacing: 0.35em; text-indent: 0.35em; color: var(--muted); padding-bottom: 0.25em; white-space: nowrap;
 }
 
 /* emoji：少量、与米色调统一 */
@@ -155,6 +156,7 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
   animation: bob 2.6s ease-in-out infinite;
   transition: opacity .35s, transform .35s;
 }
+.emo::after { content: attr(data-emo); }
 .emo.out { opacity: 0; transform: scale(0.3) rotate(-25deg); }
 @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.12em; } }
 
@@ -417,7 +419,7 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
 @media (max-width: 560px) {
   .logo-mark { width: 26px; height: 26px; }
   .nav nav { font-size: 0.8rem; }
-  .lang button { padding: 3px 7px; }
+  .lang a { padding: 3px 7px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
