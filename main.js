@@ -13,6 +13,9 @@
   ];
   // 点阵 K 标志（由 scratch 生成器输出；颜色交给 CSS：K 用当前文字色，句点用米色）
   const LOGO = `<svg class="logo-mark" viewBox="0 0 90 90" aria-hidden="true"><circle class="k" style="--i:0" cx="5" cy="5" r="4.3"/><circle class="k" style="--i:1" cx="15" cy="5" r="4.08"/><circle class="g" style="--i:2" cx="25" cy="5" r="0.95"/><circle class="g" style="--i:3" cx="35" cy="5" r="0.95"/><circle class="g" style="--i:4" cx="45" cy="5" r="0.95"/><circle class="k" style="--i:5" cx="55" cy="5" r="3.22"/><circle class="k" style="--i:6" cx="65" cy="5" r="3.01"/><circle class="g" style="--i:7" cx="75" cy="5" r="0.95"/><circle class="g" style="--i:8" cx="85" cy="5" r="0.95"/><circle class="k" style="--i:9" cx="5" cy="15" r="4.3"/><circle class="k" style="--i:10" cx="15" cy="15" r="4.08"/><circle class="g" style="--i:11" cx="25" cy="15" r="0.95"/><circle class="g" style="--i:12" cx="35" cy="15" r="0.95"/><circle class="k" style="--i:13" cx="45" cy="15" r="3.44"/><circle class="k" style="--i:14" cx="55" cy="15" r="3.22"/><circle class="g" style="--i:15" cx="65" cy="15" r="0.95"/><circle class="g" style="--i:16" cx="75" cy="15" r="0.95"/><circle class="g" style="--i:17" cx="85" cy="15" r="0.95"/><circle class="k" style="--i:18" cx="5" cy="25" r="4.3"/><circle class="k" style="--i:19" cx="15" cy="25" r="4.08"/><circle class="g" style="--i:20" cx="25" cy="25" r="0.95"/><circle class="k" style="--i:21" cx="35" cy="25" r="3.65"/><circle class="k" style="--i:22" cx="45" cy="25" r="3.44"/><circle class="g" style="--i:23" cx="55" cy="25" r="0.95"/><circle class="g" style="--i:24" cx="65" cy="25" r="0.95"/><circle class="g" style="--i:25" cx="75" cy="25" r="0.95"/><circle class="g" style="--i:26" cx="85" cy="25" r="0.95"/><circle class="k" style="--i:27" cx="5" cy="35" r="4.3"/><circle class="k" style="--i:28" cx="15" cy="35" r="4.08"/><circle class="k" style="--i:29" cx="25" cy="35" r="3.87"/><circle class="k" style="--i:30" cx="35" cy="35" r="3.65"/><circle class="g" style="--i:31" cx="45" cy="35" r="0.95"/><circle class="g" style="--i:32" cx="55" cy="35" r="0.95"/><circle class="g" style="--i:33" cx="65" cy="35" r="0.95"/><circle class="g" style="--i:34" cx="75" cy="35" r="0.95"/><circle class="g" style="--i:35" cx="85" cy="35" r="0.95"/><circle class="k" style="--i:36" cx="5" cy="45" r="4.3"/><circle class="k" style="--i:37" cx="15" cy="45" r="4.08"/><circle class="k" style="--i:38" cx="25" cy="45" r="3.87"/><circle class="g" style="--i:39" cx="35" cy="45" r="0.95"/><circle class="g" style="--i:40" cx="45" cy="45" r="0.95"/><circle class="g" style="--i:41" cx="55" cy="45" r="0.95"/><circle class="g" style="--i:42" cx="65" cy="45" r="0.95"/><circle class="g" style="--i:43" cx="75" cy="45" r="0.95"/><circle class="g" style="--i:44" cx="85" cy="45" r="0.95"/><circle class="k" style="--i:45" cx="5" cy="55" r="4.3"/><circle class="k" style="--i:46" cx="15" cy="55" r="4.08"/><circle class="k" style="--i:47" cx="25" cy="55" r="3.87"/><circle class="k" style="--i:48" cx="35" cy="55" r="3.65"/><circle class="g" style="--i:49" cx="45" cy="55" r="0.95"/><circle class="g" style="--i:50" cx="55" cy="55" r="0.95"/><circle class="g" style="--i:51" cx="65" cy="55" r="0.95"/><circle class="g" style="--i:52" cx="75" cy="55" r="0.95"/><circle class="g" style="--i:53" cx="85" cy="55" r="0.95"/><circle class="k" style="--i:54" cx="5" cy="65" r="4.3"/><circle class="k" style="--i:55" cx="15" cy="65" r="4.08"/><circle class="g" style="--i:56" cx="25" cy="65" r="0.95"/><circle class="k" style="--i:57" cx="35" cy="65" r="3.65"/><circle class="k" style="--i:58" cx="45" cy="65" r="3.44"/><circle class="g" style="--i:59" cx="55" cy="65" r="0.95"/><circle class="g" style="--i:60" cx="65" cy="65" r="0.95"/><circle class="g" style="--i:61" cx="75" cy="65" r="0.95"/><circle class="g" style="--i:62" cx="85" cy="65" r="0.95"/><circle class="k" style="--i:63" cx="5" cy="75" r="4.3"/><circle class="k" style="--i:64" cx="15" cy="75" r="4.08"/><circle class="g" style="--i:65" cx="25" cy="75" r="0.95"/><circle class="g" style="--i:66" cx="35" cy="75" r="0.95"/><circle class="k" style="--i:67" cx="45" cy="75" r="3.44"/><circle class="k" style="--i:68" cx="55" cy="75" r="3.22"/><circle class="g" style="--i:69" cx="65" cy="75" r="0.95"/><circle class="g" style="--i:70" cx="75" cy="75" r="0.95"/><circle class="g" style="--i:71" cx="85" cy="75" r="0.95"/><circle class="k" style="--i:72" cx="5" cy="85" r="4.3"/><circle class="k" style="--i:73" cx="15" cy="85" r="4.08"/><circle class="g" style="--i:74" cx="25" cy="85" r="0.95"/><circle class="g" style="--i:75" cx="35" cy="85" r="0.95"/><circle class="g" style="--i:76" cx="45" cy="85" r="0.95"/><circle class="k" style="--i:77" cx="55" cy="85" r="3.22"/><circle class="k" style="--i:78" cx="65" cy="85" r="3.01"/><circle class="g" style="--i:79" cx="75" cy="85" r="0.95"/><circle class="a" style="--i:80" cx="85" cy="85" r="4.3"/></svg>`;
+  // 本次部署的版本号（部署时写进 main.js?v=…），图片也带上，替换同名图片后不会读到旧缓存
+  const V = new URL(document.currentScript.src).searchParams.get("v") || "dev";
+  const ver = (u) => (u && !/^(https?:|data:)/.test(u) ? `${u}${u.includes("?") ? "&" : "?"}v=${V}` : u);
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => document.querySelectorAll(s);
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -107,7 +110,7 @@
       /<\/span>$/,
       `<span class="emo" id="role-emo" aria-hidden="true">${emoji(0)}</span></span>`
     );
-    $("#portrait").src = S.portrait;
+    $("#portrait").src = ver(S.portrait);
     $("#home-index").innerHTML = PAGES.map(
       (p) => `<li><a href="${p.href}"><span class="label">${esc(ui(`pages.${p.key}.title`))}</span><span class="alt" lang="en">${esc(ui(`pages.${p.key}.alt`))}</span><span class="arrow">→</span></a></li>`
     ).join("");
@@ -135,7 +138,7 @@
   /* ---------- 个人经历 ---------- */
   // 官方 logo（单个路径或数组）
   const logos = (src, alt) =>
-    `<div class="row-logo">${[].concat(src || []).map((u) => `<img src="${esc(u)}" alt="${esc(alt)}" loading="lazy" />`).join("")}</div>`;
+    `<div class="row-logo">${[].concat(src || []).map((u) => `<img src="${esc(ver(u))}" alt="${esc(alt)}" loading="lazy" />`).join("")}</div>`;
   const row = (year, title, sub, links, titleAttr = "", logo = "") => `<li class="row ${rv()}">
       <span class="year mono">${esc(year)}</span>
       ${logo}
@@ -205,7 +208,7 @@
           <div class="gallery">${tr.photos
             .map(
               (p, i) => `<figure class="shot ${p.ratio || ""}" data-trip="${ti}" data-i="${i}" tabindex="0" role="button">
-                <img src="${esc(p.src)}" alt="${esc(photoCaption(tr, p))}" loading="lazy" />
+                <img src="${esc(ver(p.src))}" alt="${esc(photoCaption(tr, p))}" loading="lazy" />
                 <figcaption class="mono"><span>${esc(p.caption ? t(p.caption) : tripLabel(tr))}</span></figcaption>
               </figure>`
             )
@@ -224,7 +227,7 @@
     const p = tr?.photos[lbIndex];
     if (!p) return;
     const img = lb.querySelector("img");
-    img.src = p.src;
+    img.src = ver(p.src);
     img.alt = photoCaption(tr, p);
     lb.querySelector(".lb-cap").textContent = `${photoCaption(tr, p)} · ${lbIndex + 1}/${tr.photos.length}`;
   }
@@ -278,7 +281,7 @@
         (b) => `<article class="build ${rv()}">
           <a class="frame" href="${esc(b.url)}" target="_blank" rel="noopener" aria-label="${esc(b.name)} — ${esc(domain(b.url))}">
             <span class="frame-bar mono"><i></i><i></i><i></i><span>${esc(domain(b.url))}</span></span>
-            <img src="${esc(b.image)}" alt="" loading="lazy" />
+            <img src="${esc(ver(b.image))}" alt="" loading="lazy" />
           </a>
           <div class="build-head">
             <h2 lang="en">${esc(b.name)}</h2>

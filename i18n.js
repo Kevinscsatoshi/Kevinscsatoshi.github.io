@@ -13,7 +13,6 @@ window.I18N = {
     hero: {
       // 大标题：名字（<em> 部分带米色高光）
       name: '<span class="line">顾思聪</span><span class="line"><em lang="en">Kevin</em></span>',
-      sub: '你好 <span class="wave" aria-hidden="true">👋</span> 现就职于宁德时代（CATL）。路上拍照，夜里写代码。',
     },
     pages: {
       experience: {
@@ -54,7 +53,6 @@ window.I18N = {
     nav: { experience: "Experience", photography: "Photo & Travel", projects: "Vibe Projects", blog: "Blog", city: "Tokyo" },
     hero: {
       name: '<span class="line"><em>Kevin</em></span><span class="line">Sicong Gu</span>',
-      sub: 'Hi <span class="wave" aria-hidden="true">👋</span> I work at CATL. Photographer on the road, builder by night.',
     },
     pages: {
       experience: {
@@ -95,7 +93,6 @@ window.I18N = {
     nav: { experience: "経歴", photography: "写真と旅", projects: "Vibe プロジェクト", blog: "ブログ", city: "東京" },
     hero: {
       name: '<span class="line"><ruby>顧<rt>こ</rt></ruby> <ruby>思聡<rt>しそう</rt></ruby></span><span class="line"><em lang="en">Kevin</em></span>',
-      sub: 'こんにちは <span class="wave" aria-hidden="true">👋</span> 現在は CATL（寧徳時代）勤務。旅先では写真を撮り、夜はプロダクトをつくっています。',
     },
     pages: {
       experience: {

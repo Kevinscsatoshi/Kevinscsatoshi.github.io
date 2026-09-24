@@ -147,10 +147,9 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
   font-family: var(--sans); font-size: 0.15em; font-weight: 400;
   letter-spacing: 0.35em; color: var(--muted); padding-bottom: 0.25em;
 }
-.hero-sub { max-width: 560px; margin-top: 36px; color: var(--muted); font-size: 1.02rem; }
 
 /* emoji：少量、与米色调统一 */
-.emo, .wave { display: inline-block; font-style: normal; filter: grayscale(1) sepia(0.35) contrast(1.05); }
+.emo { display: inline-block; font-style: normal; filter: grayscale(1) sepia(0.35) contrast(1.05); }
 .emo {
   font-size: 0.3em; vertical-align: 1.6em; margin-left: 0.15em;
   animation: bob 2.6s ease-in-out infinite;
@@ -158,12 +157,6 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
 }
 .emo.out { opacity: 0; transform: scale(0.3) rotate(-25deg); }
 @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.12em; } }
-.wave { transform-origin: 70% 75%; animation: wave 3.2s ease-in-out 0.8s infinite; }
-@keyframes wave {
-  0%, 60%, 100% { transform: rotate(0); }
-  10%, 30% { transform: rotate(16deg); }
-  20%, 40% { transform: rotate(-8deg); }
-}
 
 /* 头像：像素照片，与纸面融合；宽度随屏幕变化 */
 .portrait { width: clamp(200px, 24vw, 320px); }
@@ -389,7 +382,7 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
 :lang(ja) :is(p, h1, h2, h3, h4, .label) { word-break: auto-phrase; }
 :is(:lang(zh), :lang(ja)) .hero-title { line-height: 1.08; letter-spacing: 0.01em; }
 :is(:lang(zh), :lang(ja)) .page-title { letter-spacing: 0.02em; }
-:is(:lang(zh), :lang(ja)) :is(.hero-sub, .page-intro, .post-body) { line-height: 1.9; }
+:is(:lang(zh), :lang(ja)) :is(.page-intro, .post-body) { line-height: 1.9; }
 /* 中日文不用斜体（会被机械倾斜），悬停改为下划线 */
 :is(:lang(zh), :lang(ja)) .hero-title em:not(:lang(en)) { font-style: normal; }
 :is(:lang(zh), :lang(ja)) :is(.index a:hover .label, .post a:hover h2) {
