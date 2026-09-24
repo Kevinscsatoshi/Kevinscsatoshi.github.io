@@ -148,8 +148,23 @@
     $("#timeline").innerHTML = S.timeline
       .map((x) => row(t(x.year), t(x.title), esc(t(x.org)), x.url ? ext(x.url, domain(x.url).replace(/^www\./, "")) : "", "", logos(x.logo, t(x.org))))
       .join("");
+    // 代表项目：每个公司 / 机构一行，具体项目列在下面
     $("#projects-list").innerHTML = S.projects
-      .map((p) => row(p.year, t(p.title), `<span class="venue mono">${esc(t(p.venue))}</span> — ${esc(t(p.desc))}`, linkList(p.links), enAttr(p.title), logos(p.logo, t(p.venue))))
+      .map((g) => {
+        const items = g.items
+          .map(
+            (it) => `<li><strong${enAttr(it.title)}>${esc(t(it.title))}</strong><span>${esc(t(it.desc))}</span>${
+              it.links?.length ? `<span class="plinks mono">${linkList(it.links)}</span>` : ""
+            }</li>`
+          )
+          .join("");
+        return `<li class="row ${rv()}">
+          <span class="year mono">${esc(t(g.years))}</span>
+          ${logos(g.logo, t(g.org))}
+          <div><h3${enAttr(g.org)}>${esc(t(g.org))}</h3><ul class="row-items">${items}</ul></div>
+          <div></div>
+        </li>`;
+      })
       .join("");
   }
 

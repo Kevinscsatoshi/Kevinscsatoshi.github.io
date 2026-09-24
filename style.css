@@ -231,6 +231,14 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
 .row-sub { color: var(--muted); font-size: 0.92rem; margin-top: 6px; max-width: 760px; }
 .row .venue { color: var(--fg); font-weight: 500; }
 .row .plinks a { text-transform: none; }
+/* 同一公司下的多个项目 */
+#projects-list .row { align-items: start; }
+#projects-list .row .year, #projects-list .row-logo { margin-top: 6px; }
+.row-items { list-style: none; margin-top: 12px; display: grid; gap: 14px; max-width: 780px; }
+.row-items li { position: relative; padding-left: 18px; font-size: 0.92rem; color: var(--muted); }
+.row-items li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 1px; background: var(--muted); }
+.row-items strong { display: block; color: var(--fg); font-weight: 500; font-size: 0.98rem; margin-bottom: 2px; }
+.row-items .plinks { display: inline-flex; margin-left: 10px; }
 
 /* 摄影旅行（深色页） */
 .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 28px; }

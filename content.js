@@ -62,15 +62,13 @@ window.SITE = {
       logo: "assets/logos/japan-lab.png",
     },
     {
-      year: "2022 — 2024",
+      year: "2020 — 2024",
       title: { zh: "历史学学士 · 辅修信息学", en: "B.A. History · Minor in Informatics", ja: "歴史学学士（情報学副専攻）" },
-      org: { zh: "得克萨斯大学奥斯汀分校", en: "The University of Texas at Austin", ja: "テキサス大学オースティン校" },
-      logo: "assets/logos/ut-austin.png",
-    },
-    {
-      year: "2020 — 2022",
-      title: { zh: "电子与计算机工程（ECE）· 数据科学方向", en: "Electrical & Computer Engineering (ECE) · Data Science track", ja: "電気・コンピュータ工学（ECE）· データサイエンス・トラック" },
-      org: { zh: "得克萨斯大学奥斯汀分校 · 前两年，之后转入历史学", en: "The University of Texas at Austin · first two years, then switched to History", ja: "テキサス大学オースティン校 · 最初の2年間、その後歴史学へ" },
+      org: {
+        zh: "得克萨斯大学奥斯汀分校 · 前两年就读电子与计算机工程（ECE，数据科学方向），之后转入历史学",
+        en: "The University of Texas at Austin · first two years in Electrical & Computer Engineering (ECE, Data Science track), then switched to History",
+        ja: "テキサス大学オースティン校 · 最初の2年間は電気・コンピュータ工学（ECE、データサイエンス・トラック）、その後歴史学へ",
+      },
       logo: "assets/logos/ut-austin.png",
     },
     {
@@ -80,73 +78,77 @@ window.SITE = {
       logo: "assets/logos/nfls.png",
     },
   ],
+  // 代表项目：同一家公司 / 机构只占一行，下面列出具体项目
   projects: [
     {
-      year: 2026,
-      title: { zh: "香港土木工程拓展署（CEDD）钢筋检测 PoC", en: "Rebar-inspection PoC for Hong Kong's CEDD", ja: "香港土木工程拓展署（CEDD）向け配筋検査 PoC" },
-      venue: "DataLabs × BeeInventor",
+      years: "2025 — 2026",
+      org: { zh: "DataLabs 株式会社", en: "DataLabs Inc.", ja: "DataLabs 株式会社" },
       logo: "assets/logos/datalabs.png",
-      desc: {
-        zh: "与香港本地合作伙伴 BeeInventor 共同推进：业务方案提案、与传统检测方式的对比验证，以及 PoC 报告撰写。",
-        en: "Worked with Hong Kong partner BeeInventor on the PoC — service proposal, benchmarking against conventional inspection, and the PoC report.",
-        ja: "現地パートナー BeeInventor 社と共同で推進。業務提案、従来手法との比較検証、報告書の作成を担当。",
-      },
+      items: [
+        {
+          title: { zh: "香港土木工程拓展署（CEDD）钢筋检测 PoC", en: "Rebar-inspection PoC for Hong Kong's CEDD", ja: "香港土木工程拓展署（CEDD）向け配筋検査 PoC" },
+          desc: {
+            zh: "与香港本地合作伙伴 BeeInventor 共同推进：业务方案提案、与传统检测方式的对比验证，以及 PoC 报告撰写。",
+            en: "Worked with Hong Kong partner BeeInventor on the PoC — service proposal, benchmarking against conventional inspection, and the PoC report.",
+            ja: "現地パートナー BeeInventor 社と共同で推進。業務提案、従来手法との比較検証、報告書の作成を担当。",
+          },
+        },
+        {
+          title: { zh: "清水建设 × Modely", en: "Shimizu Corporation × Modely", ja: "清水建設 × Modely" },
+          desc: {
+            zh: "在清水建设研发设施“NOVARE”推进 Modely 试点，从前期验证到结果评审全程负责，并将合作拓展为高速公路枢纽立交工程的钢筋竣工（As-built）建模项目。",
+            en: "Took a Modely pilot at Shimizu's NOVARE R&D facility from pre-validation to results review, then helped grow it into a rebar as-built modeling project for an expressway junction.",
+            ja: "清水建設の技術研究施設「NOVARE」での Modely 実証を事前検証から結果レビューまで推進し、高速道路ジャンクション工事の鉄筋 As-built モデル作成案件へと展開。",
+          },
+        },
+        {
+          title: { zh: "Framy 英语市场拓展", en: "Framy — English-market launch", ja: "Framy 英語圏展開" },
+          desc: {
+            zh: "负责新产品 Framy（基于点云与 2D 图纸自动生成 BIM/CIM 模型）的英语市场拓展，涵盖英文官网搭建、SEO 与索引策略、竞品与关键词分析，以及海外市场定位与传播文案。",
+            en: "Led the overseas launch of Framy, which auto-generates BIM/CIM models from point clouds and 2D drawings — English site, SEO and indexing strategy, competitor research and messaging.",
+            ja: "点群・2D図面から BIM／CIM モデルを自動生成する新プロダクト「Framy」の英語圏展開を担当。英語版サイト構築、SEO・インデックス戦略、競合・キーワード分析、海外向けメッセージング設計を主導。",
+          },
+        },
+        {
+          title: { zh: "东京都风险企业技术特别奖", en: "Tokyo Venture Technology Special Award", ja: "東京都ベンチャー技術特別賞" },
+          desc: {
+            zh: "DataLabs 凭借三维点云自动建模技术获得该奖；我在“产业交流展 2025”上以日语负责现场演示与客户洽谈。",
+            en: "DataLabs won the award for its automated 3D point-cloud modeling. I ran our live demos and client meetings in Japanese at Sangyo Koryuten 2025.",
+            ja: "DataLabs が「3次元点群データの自動モデル化技術」で受賞。産業交流展2025では、ブースでのデモ・商談対応を日本語で担当しました。",
+          },
+        },
+      ],
     },
     {
-      year: 2026,
-      title: { zh: "清水建设 × Modely", en: "Shimizu Corporation × Modely", ja: "清水建設 × Modely" },
-      venue: "DataLabs",
-      logo: "assets/logos/datalabs.png",
-      desc: {
-        zh: "在清水建设研发设施“NOVARE”推进 Modely 试点，从前期验证到结果评审全程负责，并将合作拓展为高速公路枢纽立交工程的钢筋竣工（As-built）建模项目。",
-        en: "Took a Modely pilot at Shimizu's NOVARE R&D facility from pre-validation to results review, then helped grow it into a rebar as-built modeling project for an expressway junction.",
-        ja: "清水建設の技術研究施設「NOVARE」での Modely 実証を事前検証から結果レビューまで推進し、高速道路ジャンクション工事の鉄筋 As-built モデル作成案件へと展開。",
-      },
-    },
-    {
-      year: 2026,
-      title: { zh: "Framy 英语市场拓展", en: "Framy — English-market launch", ja: "Framy 英語圏展開" },
-      venue: "DataLabs",
-      logo: "assets/logos/datalabs.png",
-      desc: {
-        zh: "负责新产品 Framy（基于点云与 2D 图纸自动生成 BIM/CIM 模型）的英语市场拓展，涵盖英文官网搭建、SEO 与索引策略、竞品与关键词分析，以及海外市场定位与传播文案。",
-        en: "Led the overseas launch of Framy, which auto-generates BIM/CIM models from point clouds and 2D drawings — English site, SEO and indexing strategy, competitor research and messaging.",
-        ja: "点群・2D図面から BIM／CIM モデルを自動生成する新プロダクト「Framy」の英語圏展開を担当。英語版サイト構築、SEO・インデックス戦略、競合・キーワード分析、海外向けメッセージング設計を主導。",
-      },
-    },
-    {
-      year: 2025,
-      title: { zh: "东京都风险企业技术特别奖", en: "Tokyo Venture Technology Special Award", ja: "東京都ベンチャー技術特別賞" },
-      venue: "DataLabs",
-      logo: "assets/logos/datalabs.png",
-      desc: {
-        zh: "DataLabs 凭借三维点云自动建模技术获得该奖；我在“产业交流展 2025”上以日语负责现场演示与客户洽谈。",
-        en: "DataLabs won the award for its automated 3D point-cloud modeling. I ran our live demos and client meetings in Japanese at Sangyo Koryuten 2025.",
-        ja: "DataLabs が「3次元点群データの自動モデル化技術」で受賞。産業交流展2025では、ブースでのデモ・商談対応を日本語で担当しました。",
-      },
-    },
-    {
-      year: 2024,
-      title: { zh: "互动式 3D 文化遗产展陈", en: "Interactive 3D Heritage Exhibits", ja: "文化遺産のインタラクティブ3D展示" },
-      venue: "MIT Media Lab",
+      years: "2024",
+      org: "MIT Media Lab",
       logo: "assets/logos/mit-media-lab.png",
-      desc: {
-        zh: "以 Unity 3D 结合摄影测量与 LiDAR 工作流，为沉浸式展陈与文化可视化制作三维重建。",
-        en: "Unity 3D modeling with photogrammetry and LiDAR workflows — 3D reconstructions for immersive exhibits and cultural visualization.",
-        ja: "Unity 3D とフォトグラメトリ／LiDAR のワークフローを用いて、没入型展示と文化の可視化に向けた3D再構築の制作を支援。",
-      },
+      items: [
+        {
+          title: { zh: "互动式 3D 文化遗产展陈", en: "Interactive 3D Heritage Exhibits", ja: "文化遺産のインタラクティブ3D展示" },
+          desc: {
+            zh: "以 Unity 3D 结合摄影测量与 LiDAR 工作流，为沉浸式展陈与文化可视化制作三维重建。",
+            en: "Unity 3D modeling with photogrammetry and LiDAR workflows — 3D reconstructions for immersive exhibits and cultural visualization.",
+            ja: "Unity 3D とフォトグラメトリ／LiDAR のワークフローを用いて、没入型展示と文化の可視化に向けた3D再構築の制作を支援。",
+          },
+        },
+      ],
     },
     {
-      year: 2023,
-      title: "Playing at Empire",
-      venue: "UT Austin Japan Lab",
+      years: "2023",
+      org: "UT Austin Japan Lab",
       logo: "assets/logos/japan-lab.png",
-      desc: {
-        zh: "将 1939 年的日本双六棋盘游戏改编为网页游戏。担任团队负责人，统筹从编码、玩法设计到打包上线的全流程，项目至今仍在线运行。",
-        en: "A digital-history game adapting a 1939 Japanese sugoroku. As team lead, I drove development end to end — code, gameplay logic, builds — while directing the historical-context team. Live online.",
-        ja: "1939年の日本の双六を翻案したデジタル歴史ゲーム。チームリードとして、コーディングからゲームロジック、ビルド・公開までを一貫して担当し、歴史考証チームも統括。現在もオンラインで公開中。",
-      },
-      links: [{ label: "@play", url: "https://laits.utexas.edu/~mr56267/Sugoroku/China_war/China_War.html" }],
+      items: [
+        {
+          title: "Playing at Empire",
+          desc: {
+            zh: "将 1939 年的日本双六棋盘游戏改编为网页游戏。担任团队负责人，统筹从编码、玩法设计到打包上线的全流程，项目至今仍在线运行。",
+            en: "A digital-history game adapting a 1939 Japanese sugoroku. As team lead, I drove development end to end — code, gameplay logic, builds — while directing the historical-context team. Live online.",
+            ja: "1939年の日本の双六を翻案したデジタル歴史ゲーム。チームリードとして、コーディングからゲームロジック、ビルド・公開までを一貫して担当し、歴史考証チームも統括。現在もオンラインで公開中。",
+          },
+          links: [{ label: "@play", url: "https://laits.utexas.edu/~mr56267/Sugoroku/China_war/China_War.html" }],
+        },
+      ],
     },
   ],
 
