@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 静态默认值（English）：链接预览与爬虫读取这里；JS 会按语言替换 -->
+  <title>Kevin Sicong Gu</title>
+  <meta name="description" content="Kevin Sicong Gu — experience, photography &amp; travel, vibe projects and a blog." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Kevin Sicong Gu" />
+  <meta property="og:description" content="Kevin Sicong Gu — experience, photography &amp; travel, vibe projects and a blog." />
+  <meta property="og:image" content="assets/portrait.png" />
+  <meta name="theme-color" content="#ece5d7" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+JP:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="home">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="spotlight" aria-hidden="true"></div>
+
+  <!-- 顶栏、页脚由 main.js 生成（所有页面共用） -->
+  <header class="nav" id="site-nav"></header>
+
+  <!-- 首页：只放名字与四个入口 -->
+  <main class="hero" id="top">
+    <div class="hero-grid">
+      <div class="hero-main">
+        <h1 class="hero-title reveal" id="hero-title"></h1>
+        <p class="hero-sub reveal" data-i18n-html="hero.sub"></p>
+      </div>
+      <figure class="portrait reveal">
+        <img id="portrait" alt="Kevin Sicong Gu" width="773" height="1024" />
+      </figure>
+    </div>
+    <ol class="index reveal" id="home-index"></ol>
+    <!-- 点阵艺术：生成式漩涡（art.js） -->
+    <figure class="art reveal">
+      <canvas id="art" aria-hidden="true"></canvas>
+    </figure>
+  </main>
+
+  <footer class="footer dark" id="site-footer"></footer>
+
+  <script src="i18n.js"></script>
+  <script src="content.js"></script>
+  <script src="main.js"></script>
+  <script src="art.js"></script>
+</body>
+</html>
