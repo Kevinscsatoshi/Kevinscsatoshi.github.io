@@ -1,0 +1,42 @@
+# 推送到 main 后自动部署到 GitHub Pages。
+# 部署前把 HTML 里的 ?v=dev 换成本次提交的 ID，让浏览器每次更新都重新下载 CSS / JS，
+# 不会因为缓存（GitHub Pages 默认缓存 10 分钟）而看到旧版本。
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stamp asset versions
+        run: |
+          V="${GITHUB_SHA::7}"
+          sed -i "s/?v=dev/?v=${V}/g" *.html
+          grep -o '?v=[0-9a-f]*' index.html | sort -u
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
