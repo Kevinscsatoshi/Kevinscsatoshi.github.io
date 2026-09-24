@@ -220,15 +220,13 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
 }
 .row:hover { background: linear-gradient(90deg, var(--bg-2), transparent); }
 .row .year { color: var(--muted); }
-/* 公司 / 学校官方 logo：默认黑白融入配色，悬停显示原色 */
+/* 公司 / 学校官方 logo（原色） */
 .row-logo { display: flex; align-items: center; gap: 8px; min-height: 36px; }
 .row-logo img {
   max-height: 32px; max-width: 112px; width: auto; height: auto; object-fit: contain;
-  filter: grayscale(1) contrast(1.1); opacity: 0.8; transition: filter .35s, opacity .35s;
 }
 .row-logo img[src*="newz"], .row-logo img[src*="geoz"] { max-height: 28px; border-radius: 7px; }
 .row-logo img[src*="nfls"] { max-height: 44px; }
-.row:hover .row-logo img { filter: none; opacity: 1; }
 .row h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.2; }
 .row-sub { color: var(--muted); font-size: 0.92rem; margin-top: 6px; max-width: 760px; }
 .row .venue { color: var(--fg); font-weight: 500; }
