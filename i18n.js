@@ -19,7 +19,7 @@ window.I18N = {
       experience: {
         title: "个人经历",
         alt: "Experience",
-        intro: "现就职于宁德时代（CATL）。此前在东京的 DataLabs 负责建筑 DX 产品的商务拓展；更早在 MIT Media Lab 与 UT Austin Japan Lab 做 3D 与数字人文项目。中英日三语。",
+        intro: "现为宁德时代（CATL）储能电气工程师。此前在东京的 DataLabs 负责建筑 DX 产品的商务拓展；更早在 MIT Media Lab 与 UT Austin Japan Lab 做 3D 与数字人文项目。中英日三语。",
         timeline: "履历",
         selected: "代表项目",
       },
@@ -60,7 +60,7 @@ window.I18N = {
       experience: {
         title: "Experience",
         alt: "",
-        intro: "I work at CATL. Before that, business development for construction-DX products at DataLabs in Tokyo; earlier, 3D and digital-humanities projects at the MIT Media Lab and the UT Austin Japan Lab. Trilingual in Chinese, English and Japanese.",
+        intro: "I'm an energy storage electrical engineer at CATL. Before that, business development for construction-DX products at DataLabs in Tokyo; earlier, 3D and digital-humanities projects at the MIT Media Lab and the UT Austin Japan Lab. Trilingual in Chinese, English and Japanese.",
         timeline: "Timeline",
         selected: "Selected Work",
       },
@@ -101,7 +101,7 @@ window.I18N = {
       experience: {
         title: "経歴",
         alt: "Experience",
-        intro: "現在は CATL（寧徳時代）に勤務。前職の DataLabs（東京）では建設DXプロダクトの事業開発を担当し、それ以前は MIT Media Lab と UT Austin Japan Lab で3D・デジタル人文学のプロジェクトに携わりました。日・英・中のトリリンガルです。",
+        intro: "現在は CATL（寧徳時代）で蓄電システムの電気エンジニアとして勤務。前職の DataLabs（東京）では建設DXプロダクトの事業開発を担当し、それ以前は MIT Media Lab と UT Austin Japan Lab で3D・デジタル人文学のプロジェクトに携わりました。日・英・中のトリリンガルです。",
         timeline: "経歴一覧",
         selected: "主な実績",
       },

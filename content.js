@@ -11,8 +11,8 @@
 window.SITE = {
   email: "kevingunj@gmail.com",
   portrait: "assets/portrait.png",
-  // 名字旁轮换的 emoji：商务拓展 · 摄影 · 开发
-  roleEmoji: ["💼", "📷", "💻"],
+  // 名字旁轮换的 emoji：储能 · 摄影 · 开发
+  roleEmoji: ["🔋", "📷", "💻"],
   socials: [
     { label: "LinkedIn", url: "https://www.linkedin.com/in/kevin-ko-/" },
     { label: "GitHub", url: "https://github.com/Kevinscsatoshi" },
@@ -28,7 +28,7 @@ window.SITE = {
   timeline: [
     {
       year: "2026.09 —",
-      title: { zh: "商务拓展 · 大客户销售 · 战略 · 客户成功", en: "BD · Key Accounts · Strategy · Customer Success", ja: "事業開発 · キーアカウント営業 · 戦略企画 · カスタマーサクセス" },
+      title: { zh: "储能电气工程师", en: "Energy Storage Electrical Engineer", ja: "蓄電システム電気エンジニア" },
       org: { zh: "宁德时代（CATL）", en: "CATL", ja: "CATL（寧徳時代）" },
       logo: "assets/logos/catl.png",
       url: "https://www.catl.com/",
@@ -49,7 +49,7 @@ window.SITE = {
     },
     {
       year: "2024.07 — 12",
-      title: { zh: "研究助理 · 3D 与数字遗产（兼职）", en: "Research Assistant, 3D & Digital Heritage (part-time)", ja: "リサーチアシスタント（3D・デジタルヘリテージ／パートタイム）" },
+      title: { zh: "研究助理 · 3D 与数字遗产", en: "Research Assistant, 3D & Digital Heritage", ja: "リサーチアシスタント（3D・デジタルヘリテージ）" },
       org: { zh: "MIT Media Lab · 美国剑桥", en: "MIT Media Lab · Cambridge, MA", ja: "MIT Media Lab · 米ケンブリッジ" },
       logo: "assets/logos/mit-media-lab.png",
       url: "https://www.media.mit.edu/",
@@ -62,9 +62,15 @@ window.SITE = {
       logo: "assets/logos/japan-lab.png",
     },
     {
-      year: "2020 — 2024",
+      year: "2022 — 2024",
       title: { zh: "历史学学士 · 辅修信息学", en: "B.A. History · Minor in Informatics", ja: "歴史学学士（情報学副専攻）" },
       org: { zh: "得克萨斯大学奥斯汀分校", en: "The University of Texas at Austin", ja: "テキサス大学オースティン校" },
+      logo: "assets/logos/ut-austin.png",
+    },
+    {
+      year: "2020 — 2022",
+      title: { zh: "电子与计算机工程（ECE）· 数据科学方向", en: "Electrical & Computer Engineering (ECE) · Data Science track", ja: "電気・コンピュータ工学（ECE）· データサイエンス・トラック" },
+      org: { zh: "得克萨斯大学奥斯汀分校 · 前两年，之后转入历史学", en: "The University of Texas at Austin · first two years, then switched to History", ja: "テキサス大学オースティン校 · 最初の2年間、その後歴史学へ" },
       logo: "assets/logos/ut-austin.png",
     },
     {
