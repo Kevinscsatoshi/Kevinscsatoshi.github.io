@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- __LASTMOD__ 在部署时由 GitHub Actions 替换为当天日期 -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://kevinscsatoshi.github.io/</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/?lang=zh</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/?lang=ja</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/experience.html</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/experience.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/experience.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/experience.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/experience.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/experience.html?lang=zh</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/experience.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/experience.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/experience.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/experience.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/experience.html?lang=ja</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/experience.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/experience.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/experience.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/experience.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/photography.html</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/photography.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/photography.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/photography.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/photography.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/photography.html?lang=zh</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/photography.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/photography.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/photography.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/photography.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/photography.html?lang=ja</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/photography.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/photography.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/photography.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/photography.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/projects.html</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/projects.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/projects.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/projects.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/projects.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/projects.html?lang=zh</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/projects.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/projects.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/projects.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/projects.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/projects.html?lang=ja</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/projects.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/projects.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/projects.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/projects.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/blog.html</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/blog.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/blog.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/blog.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/blog.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/blog.html?lang=zh</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/blog.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/blog.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/blog.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/blog.html" />
+  </url>
+  <url>
+    <loc>https://kevinscsatoshi.github.io/blog.html?lang=ja</loc>
+    <lastmod>__LASTMOD__</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/blog.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/blog.html?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/blog.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/blog.html" />
+  </url>
+</urlset>

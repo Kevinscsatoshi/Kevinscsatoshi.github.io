@@ -65,7 +65,7 @@
   /* ---------- 共用：顶栏 + 页脚 ---------- */
   function renderNav() {
     $("#site-nav").innerHTML = `
-      <a href="index.html" class="logo" aria-label="${esc(ui("site.title"))}">${LOGO}</a>
+      <a href="./" class="logo" aria-label="${esc(ui("site.title"))}">${LOGO}</a>
       <nav>${PAGES.map((p) => `<a href="${p.href}"${PAGE === p.key || (PAGE === "post" && p.key === "blog") ? ' class="active" aria-current="page"' : ""}>${esc(ui(`nav.${p.key}`))}</a>`).join("")}</nav>
       <div class="nav-right">
         <div class="lang" role="group" aria-label="Language / 语言 / 言語">
@@ -97,6 +97,13 @@
     const pageTitle = PAGES.some((p) => p.key === PAGE) ? ui(`pages.${PAGE}.title`) : "";
     if (PAGE !== "post") document.title = pageTitle ? `${pageTitle} — ${ui("site.title")}` : ui("site.title");
     $('meta[name="description"]')?.setAttribute("content", PAGE === "home" ? ui("site.description") : ui(`pages.${PAGE}.intro`) || ui("site.description"));
+    // 规范网址：英文 = 不带参数，中文 / 日文 = ?lang=zh|ja（与 sitemap.xml 和 hreflang 对应）
+    if (PAGE !== "post") {
+      const path = location.pathname.replace(/index\.html$/, "");
+      let link = $('link[rel="canonical"]');
+      if (!link) { link = document.createElement("link"); link.rel = "canonical"; document.head.appendChild(link); }
+      link.href = `${location.origin}${path}${lang === "en" ? "" : `?lang=${lang}`}`;
+    }
     $$("[data-i18n]").forEach((el) => (el.textContent = ui(el.dataset.i18n)));
     $$("[data-i18n-html]").forEach((el) => (el.innerHTML = ui(el.dataset.i18nHtml)));
   }
