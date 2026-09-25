@@ -202,10 +202,8 @@
   }
 
   /* ---------- 摄影旅行：相册 ---------- */
-  // 相册来自 photos/ 文件夹（部署时由 tools/build.mjs 生成 albums.js），也兼容 content.js 里手写的 trips
-  const albums = () =>
-    [...(window.ALBUMS || []), ...(S.trips || []).map((tr, i) => ({ slug: tr.slug || `trip-${i + 1}`, cover: 0, ...tr }))]
-      .sort((a, b) => (a.date < b.date ? 1 : -1));
+  // 相册来自 photos/ 文件夹（部署时由 tools/build.mjs 生成 albums.js）
+  const albums = () => [...(window.ALBUMS || [])].sort((a, b) => (a.date < b.date ? 1 : -1));
   const albumLabel = (al) => `${al.date} ${t(al.place)}`;
   const photoCaption = (al, p) => `${albumLabel(al)}${p.caption ? ` — ${t(p.caption)}` : ""}`;
   const countLabel = (n) => ui("pages.photography.count").replace("{n}", n);
@@ -252,17 +250,56 @@
         <p class="mono muted">${esc(al.date)} · ${esc(countLabel(al.photos.length))}</p>
         <h2>${esc(t(al.place))}</h2>
       </div>
-      <div class="gallery">${al.photos
+      <div class="justified" id="justified">${al.photos
         .map(
-          (p, i) => `<figure class="shot" data-i="${i}" tabindex="0" role="button" aria-label="${esc(photoCaption(al, p))}">
+          (p, i) => `<figure class="shot" data-i="${i}" data-r="${p.w && p.h ? (p.w / p.h).toFixed(4) : 1}" tabindex="0" role="button" aria-label="${esc(photoCaption(al, p))}">
             ${imgTag(p, photoCaption(al, p))}
             ${p.caption ? `<figcaption class="mono"><span>${esc(t(p.caption))}</span></figcaption>` : ""}
           </figure>`
         )
         .join("")}</div>`;
+    layoutJustified();
     if (n >= 1 && n <= al.photos.length) openLb(al, n - 1);
     else closeLb(false);
   }
+
+  // 等高行拼接：每行照片等高、铺满整行，照片不裁切。
+  // 用动态规划统一安排换行（类似排版的最优断行），让每行高度都接近目标值，最后一行也不会只剩一张。
+  const GAP = 8;
+  function layoutJustified() {
+    const box = $("#justified");
+    if (!box) return;
+    const W = box.clientWidth;
+    if (!W) return;
+    const T = W < 520 ? 170 : W < 900 ? 230 : 300;
+    const items = [...box.children];
+    const r = items.map((el) => Number(el.dataset.r) || 1);
+    const n = r.length;
+    const rowH = (i, j) => { let sum = 0; for (let k = i; k < j; k++) sum += r[k]; return (W - GAP * (j - i - 1)) / sum; };
+    const cost = (h) => { const d = (h - T) / T; return h < T * 0.45 || h > T * 2 ? 1e6 + d * d : d * d; };
+    const best = new Array(n + 1).fill(Infinity), from = new Array(n + 1).fill(0);
+    best[0] = 0;
+    for (let j = 1; j <= n; j++)
+      for (let i = Math.max(0, j - 10); i < j; i++) {
+        const c = best[i] + cost(rowH(i, j));
+        if (c < best[j]) { best[j] = c; from[j] = i; }
+      }
+    const breaks = [];
+    for (let j = n; j > 0; j = from[j]) breaks.unshift([from[j], j]);
+    for (const [i, j] of breaks) {
+      const h = rowH(i, j);
+      let used = 0;
+      for (let k = i; k < j; k++) {
+        // 每行最后一张吃掉取整误差，右边缘严格对齐
+        const w = k === j - 1 ? W - used - GAP * (j - i - 1) : Math.floor(r[k] * h);
+        used += w;
+        items[k].style.width = `${w}px`;
+        items[k].style.height = `${Math.round(h)}px`;
+      }
+    }
+  }
+  let resizeRaf = 0;
+  window.addEventListener("resize", () => { cancelAnimationFrame(resizeRaf); resizeRaf = requestAnimationFrame(layoutJustified); });
 
   const lb = $("#lightbox");
   let lbAlbum = null, lbIndex = -1;

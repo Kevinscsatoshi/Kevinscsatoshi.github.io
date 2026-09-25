@@ -156,20 +156,7 @@ window.SITE = {
   ],
 
   // ---------- 摄影旅行 photography.html ----------
-  // 按旅行分组：每次旅行 = 年/月 + 地点 + 一组照片，页面上按时间倒序排列。
-  // 新增旅行：复制一段，改 date（"2024/12" 这种格式）、place 和 photos。
-  // 照片：src 换成你的图片路径，例如 "photos/russia-2024/01.jpg"
-  //       ratio：竖图 "tall"、横图 "wide"、方图省略；caption（可选）= 单张照片说明
-  // 示例：
-  // {
-  //   date: "2024/12",
-  //   place: { zh: "俄罗斯", en: "Russia", ja: "ロシア" },
-  //   photos: [
-  //     { src: "photos/russia-2024/01.jpg", ratio: "tall" },
-  //     { src: "photos/russia-2024/02.jpg", ratio: "wide", caption: { zh: "莫斯科", en: "Moscow", ja: "モスクワ" } },
-  //   ],
-  // },
-  trips: [],
+  // 相册来自 photos/ 文件夹：每次旅行一个文件夹（如 photos/2024-12-moscow/），说明见 photos/README.md
 
   // ---------- Vibe 项目 projects.html ----------
   builds: [
