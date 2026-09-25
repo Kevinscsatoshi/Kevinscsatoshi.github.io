@@ -2,20 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <!-- GitHub Pages 在任意路径显示本页，base 保证样式和链接从网站根目录加载 -->
+  <base href="/" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- 静态默认值（English）：链接预览与爬虫读取这里；JS 会按语言替换 -->
-  <title>Blog — Kevin Sicong Gu</title>
-  <meta name="description" content="Notes on work, photography, markets and building things." />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Blog — Kevin Sicong Gu" />
-  <meta property="og:description" content="Notes on work, photography, markets and building things." />
-  <meta property="og:image" content="https://kevinscsatoshi.github.io/assets/portrait.png" />
-  <link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/blog.html" />
-  <link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/blog.html?lang=zh" />
-  <link rel="alternate" hreflang="ja" href="https://kevinscsatoshi.github.io/blog.html?lang=ja" />
-  <link rel="alternate" hreflang="x-default" href="https://kevinscsatoshi.github.io/blog.html" />
-  <meta property="og:url" content="https://kevinscsatoshi.github.io/blog.html" />
-  <meta name="twitter:card" content="summary" />
+  <title>Page not found — Kevin Sicong Gu</title>
+  <meta name="robots" content="noindex" />
   <meta name="theme-color" content="#ece5d7" />
   <link rel="icon" href="favicon.svg?v=dev" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -25,19 +17,19 @@
   <script>document.documentElement.classList.add("js");setTimeout(function(){document.documentElement.classList.add("ready")},2000)</script>
   <link rel="stylesheet" href="style.css?v=dev" />
 </head>
-<body data-page="blog">
+<body data-page="404">
   <div class="grain" aria-hidden="true"></div>
   <div class="spotlight" aria-hidden="true"></div>
 
-  <!-- 顶栏、页脚由 main.js 生成（所有页面共用） -->
   <header class="nav" id="site-nav"></header>
 
   <main class="page">
     <header class="page-head reveal">
-      <h1 class="page-title"><span data-i18n="pages.blog.title">Blog</span> <span class="alt" lang="en" data-i18n="pages.blog.alt"></span></h1>
-      <p class="page-intro" data-i18n="pages.blog.intro">Essays on history, markets and life — first published (in Chinese) on my WeChat account 路邊野犬.</p>
+      <p class="mono muted">404</p>
+      <h1 class="page-title" data-i18n="notFound.title">Page not found</h1>
+      <p class="page-intro" data-i18n="notFound.text">This page doesn't exist or has moved.</p>
+      <div class="links mono"><a href="./" data-i18n="notFound.home">Back to home</a></div>
     </header>
-    <ul class="posts" id="posts"></ul>
   </main>
 
   <footer class="footer dark" id="site-footer"></footer>

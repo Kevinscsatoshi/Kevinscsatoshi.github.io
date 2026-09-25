@@ -16,7 +16,6 @@ window.SITE = {
   socials: [
     { label: "LinkedIn", url: "https://www.linkedin.com/in/kevin-ko-/" },
     { label: "GitHub", url: "https://github.com/Kevinscsatoshi" },
-    { label: "Instagram", url: "#" }, // TODO: 换成你的摄影账号
   ],
 
   // ---------- 个人经历 experience.html ----------
@@ -28,7 +27,7 @@ window.SITE = {
   timeline: [
     {
       year: "2026.09 —",
-      title: { zh: "储能电气工程师", en: "Energy Storage Electrical Engineer", ja: "蓄電システム電気エンジニア" },
+      title: { zh: "储能电气工程师", en: "Energy Storage Electrical Engineer", ja: "電気エンジニア（蓄電システム）" },
       org: { zh: "宁德时代（CATL）", en: "CATL", ja: "CATL（寧徳時代）" },
       logo: "assets/logos/catl.png",
       url: "https://www.catl.com/",
@@ -43,31 +42,35 @@ window.SITE = {
     {
       year: "2024.06 —",
       title: { zh: "创始人 / 开发者", en: "Founder & Builder", ja: "ファウンダー／開発者" },
-      org: { zh: "NewZ · GeoZ · 开源个人项目", en: "NewZ · GeoZ · Open source", ja: "NewZ · GeoZ · 個人開発（OSS）" },
+      org: { zh: "NewZ · GeoZ · 个人开源项目", en: "NewZ · GeoZ · Open source", ja: "NewZ · GeoZ · 個人開発（OSS）" },
       logo: ["assets/logos/newz.png", "assets/logos/geoz.png"],
       url: "https://github.com/Kevinscsatoshi",
     },
     {
       year: "2024.07 — 12",
-      title: { zh: "研究助理 · 3D 与数字遗产", en: "Research Assistant, 3D & Digital Heritage", ja: "リサーチアシスタント（3D・デジタルヘリテージ）" },
-      org: { zh: "MIT Media Lab · 美国剑桥", en: "MIT Media Lab · Cambridge, MA", ja: "MIT Media Lab · 米ケンブリッジ" },
+      title: { zh: "研究助理 · 3D 与数字遗产", en: "Research Assistant, 3D & Digital Heritage", ja: "リサーチアシスタント（3D・デジタル文化遺産）" },
+      org: { zh: "MIT Media Lab · 美国剑桥", en: "MIT Media Lab · Cambridge, MA", ja: "MIT Media Lab · マサチューセッツ州ケンブリッジ" },
       logo: "assets/logos/mit-media-lab.png",
       url: "https://www.media.mit.edu/",
     },
     {
       year: "2023.01 — 2024.01",
-      title: { zh: "研究团队负责人 · 工程与叙事", en: "Research Team Lead, Engineering & Narrative", ja: "リサーチチームリード（エンジニアリング・ナラティブ）" },
+      title: { zh: "研究团队负责人 · 工程与叙事", en: "Research Team Lead, Engineering & Narrative", ja: "リサーチチームリード（開発・ナラティブ）" },
       org: "UT Austin Japan Lab",
       url: "https://www.utjapanlab.com/",
       logo: "assets/logos/japan-lab.png",
     },
     {
       year: "2020 — 2024",
-      title: { zh: "历史学学士 · 辅修信息学", en: "B.A. History · Minor in Informatics", ja: "歴史学学士（情報学副専攻）" },
+      title: {
+        zh: "电子与计算机工程（ECE，2020–2023）↔ 历史学学士 · 辅修信息学",
+        en: "Electrical & Computer Engineering (ECE, 2020–2023) ↔ B.A. History · Minor in Informatics",
+        ja: "電気・コンピュータ工学専攻（ECE、2020–2023）↔ 学士（歴史学）／副専攻：情報学",
+      },
       org: {
-        zh: "得克萨斯大学奥斯汀分校 · 前两年就读电子与计算机工程（ECE，数据科学方向），之后转入历史学",
-        en: "The University of Texas at Austin · first two years in Electrical & Computer Engineering (ECE, Data Science track), then switched to History",
-        ja: "テキサス大学オースティン校 · 最初の2年間は電気・コンピュータ工学（ECE、データサイエンス・トラック）、その後歴史学へ",
+        zh: "得克萨斯大学奥斯汀分校 · ECE 数据科学方向",
+        en: "The University of Texas at Austin · ECE, Data Science track",
+        ja: "テキサス大学オースティン校 · ECE（データサイエンス・トラック）",
       },
       logo: "assets/logos/ut-austin.png",
     },
@@ -86,35 +89,35 @@ window.SITE = {
       logo: "assets/logos/datalabs.png",
       items: [
         {
-          title: { zh: "香港土木工程拓展署（CEDD）钢筋检测 PoC", en: "Rebar-inspection PoC for Hong Kong's CEDD", ja: "香港土木工程拓展署（CEDD）向け配筋検査 PoC" },
+          title: { zh: "香港土木工程拓展署（CEDD）钢筋检测 PoC", en: "Rebar Inspection PoC for Hong Kong's CEDD", ja: "香港土木工程拓展署（CEDD）向け配筋検査 PoC" },
           desc: {
-            zh: "与香港本地合作伙伴 BeeInventor 共同推进：业务方案提案、与传统检测方式的对比验证，以及 PoC 报告撰写。",
-            en: "Worked with Hong Kong partner BeeInventor on the PoC — service proposal, benchmarking against conventional inspection, and the PoC report.",
-            ja: "現地パートナー BeeInventor 社と共同で推進。業務提案、従来手法との比較検証、報告書の作成を担当。",
+            zh: "与香港合作伙伴 BeeInventor 共同推进：提出服务方案、与传统检测方式对比验证、撰写 PoC 报告。",
+            en: "Worked with Hong Kong partner BeeInventor on the service proposal, benchmarking against conventional inspection, and the PoC report.",
+            ja: "現地パートナーの BeeInventor 社と共同で推進。サービス提案、従来の検査手法との比較検証、PoC 報告書の作成を担当。",
           },
         },
         {
           title: { zh: "清水建设 × Modely", en: "Shimizu Corporation × Modely", ja: "清水建設 × Modely" },
           desc: {
-            zh: "在清水建设研发设施“NOVARE”推进 Modely 试点，从前期验证到结果评审全程负责，并将合作拓展为高速公路枢纽立交工程的钢筋竣工（As-built）建模项目。",
+            zh: "在清水建设研发设施“NOVARE”推进 Modely 试点，从前期验证到结果评审全程负责，随后协助将合作拓展为高速公路枢纽立交的钢筋竣工（As-built）建模项目。",
             en: "Took a Modely pilot at Shimizu's NOVARE R&D facility from pre-validation to results review, then helped grow it into a rebar as-built modeling project for an expressway junction.",
-            ja: "清水建設の技術研究施設「NOVARE」での Modely 実証を事前検証から結果レビューまで推進し、高速道路ジャンクション工事の鉄筋 As-built モデル作成案件へと展開。",
+            ja: "清水建設の技術研究施設「NOVARE」で行った Modely の実証実験を、事前検証から結果レビューまで推進。その後、高速道路ジャンクション工事における鉄筋 As-built モデル作成案件への展開にも貢献。",
           },
         },
         {
-          title: { zh: "Framy 英语市场拓展", en: "Framy — English-market launch", ja: "Framy 英語圏展開" },
+          title: { zh: "Framy 英语市场拓展", en: "Framy — English-Market Launch", ja: "Framy の英語圏展開" },
           desc: {
-            zh: "负责新产品 Framy（基于点云与 2D 图纸自动生成 BIM/CIM 模型）的英语市场拓展，涵盖英文官网搭建、SEO 与索引策略、竞品与关键词分析，以及海外市场定位与传播文案。",
-            en: "Led the overseas launch of Framy, which auto-generates BIM/CIM models from point clouds and 2D drawings — English site, SEO and indexing strategy, competitor research and messaging.",
-            ja: "点群・2D図面から BIM／CIM モデルを自動生成する新プロダクト「Framy」の英語圏展開を担当。英語版サイト構築、SEO・インデックス戦略、競合・キーワード分析、海外向けメッセージング設計を主導。",
+            zh: "新产品 Framy 可从点云与 2D 图纸自动生成 BIM/CIM 模型。负责其英语市场拓展：英文官网、SEO 与索引策略、竞品与关键词分析、海外定位与传播文案。",
+            en: "Led the overseas launch of Framy, which auto-generates BIM/CIM models from point clouds and 2D drawings. Handled the English site, SEO and indexing strategy, competitor research and messaging.",
+            ja: "点群や2D図面から BIM／CIM モデルを自動生成する新プロダクト「Framy」の英語圏展開を主導。英語版サイトの構築、SEO・インデックス戦略、競合・キーワード分析、海外向けメッセージの策定を担当。",
           },
         },
         {
           title: { zh: "东京都风险企业技术特别奖", en: "Tokyo Venture Technology Special Award", ja: "東京都ベンチャー技術特別賞" },
           desc: {
-            zh: "DataLabs 凭借三维点云自动建模技术获得该奖；我在“产业交流展 2025”上以日语负责现场演示与客户洽谈。",
-            en: "DataLabs won the award for its automated 3D point-cloud modeling. I ran our live demos and client meetings in Japanese at Sangyo Koryuten 2025.",
-            ja: "DataLabs が「3次元点群データの自動モデル化技術」で受賞。産業交流展2025では、ブースでのデモ・商談対応を日本語で担当しました。",
+            zh: "DataLabs 凭借三维点云自动建模技术获奖；我在“产业交流展 2025”上用日语负责现场演示与客户洽谈。",
+            en: "Awarded to DataLabs for its automated 3D point-cloud modeling. Ran live demos and client meetings in Japanese at Sangyo Koryuten 2025.",
+            ja: "DataLabs が「3次元点群データの自動モデル化技術」で受賞。産業交流展2025では、ブースでのデモや商談に日本語で対応。",
           },
         },
       ],
@@ -127,9 +130,9 @@ window.SITE = {
         {
           title: { zh: "互动式 3D 文化遗产展陈", en: "Interactive 3D Heritage Exhibits", ja: "文化遺産のインタラクティブ3D展示" },
           desc: {
-            zh: "以 Unity 3D 结合摄影测量与 LiDAR 工作流，为沉浸式展陈与文化可视化制作三维重建。",
-            en: "Unity 3D modeling with photogrammetry and LiDAR workflows — 3D reconstructions for immersive exhibits and cultural visualization.",
-            ja: "Unity 3D とフォトグラメトリ／LiDAR のワークフローを用いて、没入型展示と文化の可視化に向けた3D再構築の制作を支援。",
+            zh: "以 Unity 3D 结合摄影测量与 LiDAR 工作流完成三维重建，用于沉浸式展陈与文化可视化。",
+            en: "Produced 3D reconstructions for immersive exhibits and cultural visualization, combining Unity 3D with photogrammetry and LiDAR workflows.",
+            ja: "Unity 3D、フォトグラメトリ、LiDAR を活用し、没入型展示や文化の可視化に向けた3D復元モデルの制作を支援。",
           },
         },
       ],
@@ -142,9 +145,9 @@ window.SITE = {
         {
           title: "Playing at Empire",
           desc: {
-            zh: "将 1939 年的日本双六棋盘游戏改编为网页游戏。担任团队负责人，统筹从编码、玩法设计到打包上线的全流程，项目至今仍在线运行。",
-            en: "A digital-history game adapting a 1939 Japanese sugoroku. As team lead, I drove development end to end — code, gameplay logic, builds — while directing the historical-context team. Live online.",
-            ja: "1939年の日本の双六を翻案したデジタル歴史ゲーム。チームリードとして、コーディングからゲームロジック、ビルド・公開までを一貫して担当し、歴史考証チームも統括。現在もオンラインで公開中。",
+            zh: "将 1939 年的日本双六棋盘游戏改编为网页游戏，至今仍在线运行。担任团队负责人，全程统筹编码、玩法设计与打包上线。",
+            en: "Led end-to-end development of a digital-history game adapting a 1939 Japanese sugoroku, from code and gameplay logic to builds, while directing the historical-context team. Still online.",
+            ja: "1939年に日本で作られた双六を翻案したデジタル歴史ゲーム。チームリードとして、コーディングからゲームロジック、ビルド・公開までを一貫して担当し、歴史考証チームも統括。現在もオンラインでプレイ可能。",
           },
           links: [{ label: "@play", url: "https://laits.utexas.edu/~mr56267/Sugoroku/China_war/China_War.html" }],
         },
@@ -176,9 +179,9 @@ window.SITE = {
       image: "assets/newz.jpg",
       tag: { zh: "预测市场新闻雷达", en: "Prediction-market news radar", ja: "予測市場ニュースレーダー" },
       desc: {
-        zh: "选一个（或两个）预测市场事件，追踪背后的新闻报道，并以新闻、价格、热度与叙事等视图呈现。",
-        en: "Pick a prediction market — or two — and follow the reporting behind it, with news, price, heat and narrative views.",
-        ja: "予測市場のイベントを1つ（または2つ）選び、その背後にある報道を追跡。ニュース・価格・ヒート・ナラティブの各ビューで表示します。",
+        zh: "选一两个预测市场事件，追踪背后的报道，按新闻、价格、热度与叙事视图查看。",
+        en: "Pick one or two prediction markets and follow the reporting behind them, with news, price, heat and narrative views.",
+        ja: "予測市場のイベントを1つ（または2つ）選ぶと、その背景にある報道を追跡できます。ニュース・価格・ヒート・ナラティブの各ビューを備えています。",
       },
       github: "https://github.com/Kevinscsatoshi",
     },
@@ -186,11 +189,11 @@ window.SITE = {
       name: "GeoZ",
       url: "https://geo-z.vercel.app/",
       image: "assets/geoz.jpg",
-      tag: { zh: "供应链情报", en: "Supply-chain intelligence", ja: "サプライチェーン・インテリジェンス" },
+      tag: { zh: "供应链情报", en: "Supply-chain intelligence", ja: "サプライチェーン分析" },
       desc: {
-        zh: "搜索公司或股票代码，追溯它的供应商与客户，以及每条关系背后的证据。",
+        zh: "搜索公司或股票代码，追溯其供应商、客户及每条关系背后的证据。",
         en: "Search a company or ticker to trace its suppliers and customers — and the evidence behind every link.",
-        ja: "企業名やティッカーを検索して、サプライヤーと顧客、そして各つながりの根拠をたどれます。",
+        ja: "企業名やティッカーで検索すると、サプライヤーや顧客とのつながりを、それぞれの根拠とあわせてたどれます。",
       },
       github: "https://github.com/Kevinscsatoshi",
     },

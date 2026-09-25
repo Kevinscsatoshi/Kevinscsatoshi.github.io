@@ -25,14 +25,19 @@
     get() { try { return localStorage.getItem("lang"); } catch { return null; } },
     set(v) { try { localStorage.setItem("lang", v); } catch {} },
   };
-  // 优先级：URL ?lang= → 上次选择 → 浏览器语言 → English
+  // 默认语言跟随访客的语言习惯：
+  //   1. 链接里的 ?lang=（只影响这一次访问，不记住）
+  //   2. 访客自己在右上角点选过的语言（记住）
+  //   3. 浏览器 / 系统的语言偏好，按访客设置的先后顺序找第一个支持的语言
+  //      （中文含繁体 → 中文，日语 → 日文，其他 → English）
   function detectLang() {
     const q = new URLSearchParams(location.search).get("lang");
-    if (LANGS.includes(q)) { store.set(q); return q; }
+    if (LANGS.includes(q)) return q;
     const saved = store.get();
     if (LANGS.includes(saved)) return saved;
-    for (const l of navigator.languages || [navigator.language || ""]) {
-      const p = l.toLowerCase().slice(0, 2);
+    const prefs = navigator.languages?.length ? navigator.languages : [navigator.language || ""];
+    for (const l of prefs) {
+      const p = String(l).toLowerCase().slice(0, 2);
       if (LANGS.includes(p)) return p;
     }
     return "en";
@@ -102,10 +107,10 @@
   function renderChrome() {
     document.documentElement.lang = HTML_LANG[lang];
     const pageTitle = PAGES.some((p) => p.key === PAGE) ? ui(`pages.${PAGE}.title`) : "";
-    if (PAGE !== "post") document.title = pageTitle ? `${pageTitle} — ${ui("site.title")}` : ui("site.title");
+    if (PAGE !== "post") document.title = pageTitle ? `${pageTitle} — ${ui("site.title")}` : PAGE === "home" ? ui("site.homeTitle") : ui("site.title");
     $('meta[name="description"]')?.setAttribute("content", PAGE === "home" ? ui("site.description") : ui(`pages.${PAGE}.desc`) || ui(`pages.${PAGE}.intro`) || ui("site.description"));
     // 规范网址：英文 = 不带参数，中文 / 日文 = ?lang=zh|ja（与 sitemap.xml 和 hreflang 对应）
-    if (PAGE !== "post") {
+    if (PAGE !== "post" && PAGE !== "404") {
       let link = $('link[rel="canonical"]');
       if (!link) { link = document.createElement("link"); link.rel = "canonical"; document.head.appendChild(link); }
       link.href = `${location.origin}${CANON_PATH}${lang === "en" ? "" : `?lang=${lang}`}`;
@@ -385,12 +390,40 @@
   setInterval(tick, 30000);
 
   /* ---------- 渲染 ---------- */
+  /* ---------- 404 ---------- */
+  function renderNotFound() {
+    document.title = `${ui("notFound.title")} — ${ui("site.title")}`;
+  }
+
+  // Blog 结构化数据：文章列表（外链到公众号原文）
+  function blogJsonLd() {
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      name: `${ui("pages.blog.title")} — ${ui("site.title")}`,
+      url: `${location.origin}/blog.html`,
+      author: { "@type": "Person", name: "Kevin Sicong Gu", url: `${location.origin}/` },
+      blogPost: posts().map((p) => ({
+        "@type": "BlogPosting",
+        headline: t(p.title),
+        datePublished: p.date,
+        url: p.url || `${location.origin}/${postHref(p)}`,
+        inLanguage: p.lang === "zh" ? "zh-CN" : HTML_LANG[lang],
+        author: { "@type": "Person", name: "Kevin Sicong Gu" },
+      })),
+    };
+    let el = $("#blog-ld");
+    if (!el) { el = document.createElement("script"); el.type = "application/ld+json"; el.id = "blog-ld"; document.head.appendChild(el); }
+    el.textContent = JSON.stringify(data);
+  }
+
   const RENDER = {
     home: () => { renderHome(); startRotator(); },
     experience: renderExperience,
     photography: renderPhotos,
     projects: renderProjects,
-    blog: renderBlog,
+    blog: () => { renderBlog(); blogJsonLd(); },
+    404: renderNotFound,
     post: renderPost,
   };
 
@@ -401,6 +434,7 @@
     RENDER[PAGE]?.();
     observeReveals();
     revealed = true;
+    document.documentElement.classList.add("ready");
   }
 
   function setLang(l) {

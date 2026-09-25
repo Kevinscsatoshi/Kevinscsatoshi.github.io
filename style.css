@@ -54,6 +54,12 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 img { display: block; max-width: 100%; }
 ::selection { background: var(--fg); color: var(--bg); }
+/* 等 JS 按访客语言渲染好再显示，避免中文 / 日文访客先看到英文 */
+body > :is(header, main, footer) { transition: opacity .25s ease; }
+.js:not(.ready) body > :is(header, main, footer) { opacity: 0; }
+/* 键盘操作时清楚的焦点；触摸时不出现灰色闪块 */
+a, button, [role="button"] { -webkit-tap-highlight-color: transparent; }
+:is(a, button, [role="button"]):focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 2px; }
 p, h1, h2, h3, h4 { text-wrap: pretty; }
 
 .mono { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
