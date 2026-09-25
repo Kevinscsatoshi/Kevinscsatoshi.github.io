@@ -79,9 +79,16 @@ async function buildAlbums() {
   const albums = [];
   for (const slug of dirs) {
     const dir = path.join(PHOTOS, slug);
-    const meta = fs.existsSync(path.join(dir, "album.json")) ? JSON.parse(fs.readFileSync(path.join(dir, "album.json"), "utf8")) : {};
+    let meta = {};
+    try {
+      if (fs.existsSync(path.join(dir, "album.json"))) meta = JSON.parse(fs.readFileSync(path.join(dir, "album.json"), "utf8"));
+    } catch (e) {
+      console.warn(`⚠️  ${slug}/album.json 格式有误，已忽略（${e.message}）`);   // 写错也不会让部署失败
+    }
     const m = slug.match(/^(\d{4})-(\d{2})-?(.*)$/);
     const files = fs.readdirSync(dir).filter((f) => IMG_EXT.has(path.extname(f).toLowerCase()) && !f.startsWith(".")).sort();
+    const skipped = fs.readdirSync(dir).filter((f) => /\.(heic|heif|dng|raw|cr2|nef|arw)$/i.test(f));
+    if (skipped.length) console.warn(`⚠️  ${slug}: 跳过不支持的格式 ${skipped.join(", ")}（请导出为 JPEG）`);
     if (!files.length) continue;
     const photos = [];
     // 同名不同格式（01.jpg / 01.png）时加上扩展名，避免输出文件互相覆盖
