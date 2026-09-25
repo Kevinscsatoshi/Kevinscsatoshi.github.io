@@ -43,6 +43,10 @@ window.I18N = {
     links: { visit: "访问", play: "试玩", site: "官网" },
     footer: { eyebrow: "联系我", made: "用心制作。" },
     notFound: { title: "页面不存在", text: "这个页面不存在，或已经移动。", home: "返回首页" },
+    egg: {
+      hint: "✦ 点一下漩涡",
+      console: "你好 👋 喜欢看源码？这个网站开源在 github.com/Kevinscsatoshi/Kevinscsatoshi.github.io\n小提示：点一下首页的漩涡。",
+    },
     lightbox: { close: "关闭 ✕", prev: "上一张", next: "下一张" },
   },
 
@@ -85,6 +89,10 @@ window.I18N = {
     links: { visit: "Visit", play: "Play", site: "Website" },
     footer: { eyebrow: "Get in touch", made: "Made with care." },
     notFound: { title: "Page not found", text: "This page doesn't exist or has moved.", home: "Back to home" },
+    egg: {
+      hint: "✦ Click the vortex",
+      console: "Hi 👋 Curious about the source? This site is open source: github.com/Kevinscsatoshi/Kevinscsatoshi.github.io\nHint: click the vortex on the home page.",
+    },
     lightbox: { close: "Close ✕", prev: "Previous photo", next: "Next photo" },
   },
 
@@ -127,6 +135,10 @@ window.I18N = {
     links: { visit: "サイトへ", play: "プレイ", site: "公式サイト" },
     footer: { eyebrow: "お問い合わせ", made: "心を込めてつくりました。" },
     notFound: { title: "ページが見つかりません", text: "お探しのページは存在しないか、移動した可能性があります。", home: "トップページへ" },
+    egg: {
+      hint: "✦ 渦をクリック",
+      console: "こんにちは 👋 ソースコードが気になりますか？このサイトはオープンソースです：github.com/Kevinscsatoshi/Kevinscsatoshi.github.io\nヒント：トップページの渦をクリックしてみてください。",
+    },
     lightbox: { close: "閉じる ✕", prev: "前の写真", next: "次の写真" },
   },
 };

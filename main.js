@@ -120,6 +120,17 @@
     $$("[data-i18n-aria]").forEach((el) => el.setAttribute("aria-label", ui(el.dataset.i18nAria)));
   }
 
+  /* ---------- 彩蛋 ---------- */
+  // 控制台里的问候（给打开开发者工具的人）
+  const DOT_K = ["●●   ●●", "●●  ●●", "●● ●●", "●●●●", "●●●", "●●●●", "●● ●●", "●●  ●●", "●●   ●● ●"].join("\n");
+  let greeted = false;
+  function consoleHello() {
+    if (greeted) return;
+    greeted = true;
+    console.log(`%c${DOT_K}`, "font: 12px/1.1 monospace; color: #141414; background: #ece5d7; padding: 8px 12px;");
+    console.log(`%c${ui("egg.console")}`, "font: 12px/1.6 system-ui; color: #635c50;");
+  }
+
   /* ---------- 首页 ---------- */
   const emoji = (i) => S.roleEmoji?.[i % (S.roleEmoji.length || 1)] ?? "";
 
@@ -462,6 +473,7 @@
     observeReveals();
     revealed = true;
     document.documentElement.classList.add("ready");
+    consoleHello();
   }
 
   function setLang(l) {

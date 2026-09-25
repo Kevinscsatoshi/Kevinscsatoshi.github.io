@@ -1,6 +1,6 @@
 // ============================================================
 //  首页点阵艺术：生成式漩涡（Maelstrom）
-//  十几万个像素点按亮度场随机撒布，缓慢旋转、向中心流动；鼠标靠近会把点推开。
+//  十几万个像素点按亮度场随机撒布，缓慢旋转、向中心流动；鼠标靠近会把点推开；点一下会聚成小图形。
 //  纯 canvas，无依赖。画布按 CSS 尺寸绘制，再用 pixelated 放大，保证点是方形像素。
 // ============================================================
 (() => {
@@ -89,6 +89,7 @@
       d.born = t - Math.random() * d.life;                                 // 错开寿命，避免同时闪烁
       return d;
     });
+    if (egg) assignTargets(egg.ch);
   }
 
   const pack = (r, g, b) => (255 << 24) | (b << 16) | (g << 8) | r;
@@ -99,12 +100,62 @@
     shade[i] = pack(...BG.map((c, j) => Math.round(c + (FG[j] - c) * a)));
   }
 
+  /* ---------- 彩蛋：点一下漩涡，点阵聚成一个小图形，再散回漩涡 ---------- */
+  const SHAPES = ["♥", "★", "☺", "✈", "☀", "♫"];
+  let shapeIdx = 0;
+  let egg = null;                                   // { start } 进行中
+  const EGG = { gather: 1.1, hold: 2.2, release: 1.3 };
+  // 把符号画到离屏画布上，取其中的像素作为每个点的目标位置
+  function shapePixels(ch) {
+    const c = document.createElement("canvas");
+    c.width = W; c.height = H;
+    const x = c.getContext("2d");
+    x.fillStyle = "#000";
+    x.textAlign = "center"; x.textBaseline = "middle";
+    x.font = `${Math.round(H * 0.82)}px "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2", "DejaVu Sans", serif`;
+    x.fillText(`${ch}\uFE0E`, W / 2, H / 2 + H * 0.04);
+    const data = x.getImageData(0, 0, W, H).data, pts = [];
+    for (let yy = 0; yy < H; yy += 2) for (let xx = 0; xx < W; xx += 2) if (data[(yy * W + xx) * 4 + 3] > 120) pts.push(xx, yy);
+    return pts;
+  }
+  function assignTargets(ch) {
+    const pts = shapePixels(ch);
+    if (!pts.length) return false;
+    const n = pts.length / 2;
+    for (const d of dots) {
+      const k = (Math.random() * n) | 0;
+      d.join = Math.random() < 0.7;                 // 约七成的点聚成图形，其余继续在周围旋转
+      d.tx = pts[k * 2] + Math.random() * 2;
+      d.ty = pts[k * 2 + 1] + Math.random() * 2;
+    }
+    return true;
+  }
+  const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+  function eggAmount(t) {
+    if (!egg) return 0;
+    const e = t - egg.start, { gather, hold, release } = EGG;
+    if (e < gather) return ease(e / gather);
+    if (e < gather + hold) return 1;
+    if (e < gather + hold + release) return 1 - ease((e - gather - hold) / release);
+    egg = null;
+    return 0;
+  }
+  function triggerEgg() {
+    if (egg) return;
+    const ch = SHAPES[shapeIdx++ % SHAPES.length];
+    if (!assignTargets(ch)) return;
+    egg = { start: now(), ch };
+    if (reduce) { frame(); setTimeout(() => { egg = null; frame(); }, (EGG.gather + EGG.hold) * 1000); }   // 减少动态：直接显示再恢复
+    else start();
+  }
+
   const t0 = performance.now();
   const now = () => (performance.now() - t0) / 1000;
   const mouse = { x: -1e4, y: -1e4 };
 
   function frame() {
     const t = now();
+    const g = reduce ? (egg ? 1 : 0) : eggAmount(t);
     buf.fill(BGC);
     const R = Math.min(W, H) * 0.16, R2 = R * R;
     for (let i = 0; i < dots.length; i++) {
@@ -120,9 +171,11 @@
         const f = (1 - Math.sqrt(dd) / R) ** 2 * 18 / (Math.sqrt(dd) + 0.001);
         x += dx * f; y += dy * f;
       }
+      const gj = d.join ? g : 0;
+      if (gj > 0) { x += (d.tx - x) * gj; y += (d.ty - y) * gj; }
       const xi = x | 0, yi = y | 0;
       if (xi < 0 || yi < 0 || xi >= W || yi >= H) continue;
-      const fade = reduce ? 1 : Math.min(1, age / 0.8, (d.life - age) / 0.8);
+      const fade = reduce ? 1 : Math.max(gj, Math.min(1, age / 0.8, (d.life - age) / 0.8));
       buf[yi * W + xi] = shade[Math.max(0, Math.min(32, Math.round(fade * d.k * 32)))];
     }
     ctx.putImageData(img, 0, 0);
@@ -143,6 +196,9 @@
     mouse.y = ((e.clientY - r.top) / r.height) * H;
   });
   canvas.addEventListener("pointerleave", () => { mouse.x = mouse.y = -1e4; });
+
+  // 触发：点一下（或轻点）画面
+  canvas.addEventListener("click", triggerEgg);
 
   let resizeTimer;
   new ResizeObserver(() => {
