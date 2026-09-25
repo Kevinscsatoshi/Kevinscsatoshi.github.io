@@ -1,5 +1,6 @@
 # 推送到 main 后自动部署到 GitHub Pages。
-# 部署前把 HTML 里的 ?v=dev 换成本次提交的 ID：拿到新 HTML 的访客一定加载配套的新 CSS / JS / 图片。
+# 构建（tools/build.mjs）：生成相册、sitemap，并把 HTML 里的 ?v=dev 换成本次提交的 ID，
+# 拿到新 HTML 的访客一定加载配套的新 CSS / JS / 图片。
 # 注意：HTML 本身仍会被 GitHub Pages 缓存最多 10 分钟（max-age=600，无法修改）；推送后刷新一下页面即可。
 name: Deploy site
 
@@ -26,17 +27,23 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Stamp asset versions
-        run: |
-          V="${GITHUB_SHA::7}"
-          sed -i "s/?v=dev/?v=${V}/g" *.html
-          grep -o '?v=[0-9a-f]*' index.html | sort -u
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      # sharp：把 photos/ 里的照片自动旋转、缩成网页用的尺寸，并去掉 EXIF / GPS
+      - name: Install image tools
+        run: npm install --no-save --no-package-lock sharp@0.35
+
+      # 生成相册（albums.js）、sitemap.xml，并给 CSS / JS / 图片加版本号，输出到 _site
+      - name: Build site
+        run: node tools/build.mjs --out _site --resize
 
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: .
+          path: _site
 
       - id: deployment
         uses: actions/deploy-pages@v5

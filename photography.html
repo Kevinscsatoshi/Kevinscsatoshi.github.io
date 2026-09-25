@@ -37,21 +37,23 @@
       <h1 class="page-title"><span data-i18n="pages.photography.title">Photo &amp; Travel</span> <span class="alt" lang="en" data-i18n="pages.photography.alt"></span></h1>
       <p class="page-intro" data-i18n="pages.photography.intro"></p>
     </header>
-    <div class="filters mono reveal" id="filters"></div>
-    <div class="trips" id="trips"></div>
+    <div id="albums"></div>
   </main>
 
   <footer class="footer dark" id="site-footer"></footer>
 
-  <!-- Lightbox -->
-  <div class="lightbox dark" id="lightbox" aria-hidden="true">
-    <button class="lb-close mono" type="button" data-i18n="lightbox.close">close ✕</button>
-    <img alt="" />
+  <!-- 大图浏览：← → 键、左右滑动、按钮切换；Esc 或点空白处关闭 -->
+  <div class="lightbox dark" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <button class="lb-close mono" type="button" data-i18n="lightbox.close">Close ✕</button>
+    <button class="lb-nav lb-prev" type="button" data-i18n-aria="lightbox.prev" aria-label="Previous">←</button>
+    <figure class="lb-stage"><img alt="" /></figure>
+    <button class="lb-nav lb-next" type="button" data-i18n-aria="lightbox.next" aria-label="Next">→</button>
     <p class="lb-cap mono"></p>
   </div>
 
   <script src="i18n.js?v=dev"></script>
   <script src="content.js?v=dev"></script>
+  <script src="albums.js?v=dev"></script>
   <script src="main.js?v=dev"></script>
 </body>
 </html>

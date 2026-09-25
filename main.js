@@ -117,6 +117,7 @@
     }
     $$("[data-i18n]").forEach((el) => (el.textContent = ui(el.dataset.i18n)));
     $$("[data-i18n-html]").forEach((el) => (el.innerHTML = ui(el.dataset.i18nHtml)));
+    $$("[data-i18n-aria]").forEach((el) => el.setAttribute("aria-label", ui(el.dataset.i18nAria)));
   }
 
   /* ---------- 首页 ---------- */
@@ -189,111 +190,137 @@
       .join("");
   }
 
-  /* ---------- 摄影旅行：按旅行分组 + 大图 ---------- */
-  // 最新的旅行排在最前；筛选与大图都用排序后的序号
-  const trips = () => [...(S.trips || [])].sort((a, b) => (a.date < b.date ? 1 : -1));
-  const tripLabel = (tr) => `${tr.date} ${t(tr.place)}`;
-  const photoCaption = (tr, p) => `${tripLabel(tr)}${p.caption ? ` — ${t(p.caption)}` : ""}`;
-  let activeTrip = "all";
-  function applyFilter() {
-    $$("#filters button").forEach((b) => {
-      const on = b.dataset.f === activeTrip;
-      b.classList.toggle("active", on);
-      b.setAttribute("aria-pressed", on);
-    });
-    $$(".trip").forEach((sec) => sec.classList.toggle("hide", activeTrip !== "all" && sec.dataset.trip !== activeTrip));
-  }
+  /* ---------- 摄影旅行：相册 ---------- */
+  // 相册来自 photos/ 文件夹（部署时由 tools/build.mjs 生成 albums.js），也兼容 content.js 里手写的 trips
+  const albums = () =>
+    [...(window.ALBUMS || []), ...(S.trips || []).map((tr, i) => ({ slug: tr.slug || `trip-${i + 1}`, cover: 0, ...tr }))]
+      .sort((a, b) => (a.date < b.date ? 1 : -1));
+  const albumLabel = (al) => `${al.date} ${t(al.place)}`;
+  const photoCaption = (al, p) => `${albumLabel(al)}${p.caption ? ` — ${t(p.caption)}` : ""}`;
+  const countLabel = (n) => ui("pages.photography.count").replace("{n}", n);
+  // 地址：#/相册 或 #/相册/第几张（从 1 开始），方便分享
+  const route = () => {
+    const [slug, n] = decodeURIComponent(location.hash.replace(/^#\/?/, "")).split("/");
+    return { slug: slug || "", n: Number(n) || 0 };
+  };
+  const imgTag = (p, alt, cls = "") =>
+    `<img src="${esc(ver(p.src))}"${p.w && p.h ? ` width="${p.w}" height="${p.h}"` : ""} alt="${esc(alt)}" loading="lazy" decoding="async"${cls ? ` class="${cls}"` : ""} />`;
 
   function renderPhotos() {
-    const list = trips();
+    const list = albums();
     let robots = $('meta[name="robots"]');
     if (!list.length) {
       if (!robots) { robots = document.createElement("meta"); robots.name = "robots"; document.head.appendChild(robots); }
       robots.content = "noindex";
-    } else robots?.remove();
-    if (!list.length) {
-      $("#filters").innerHTML = "";
-      $("#trips").innerHTML = `<p class="empty mono">${esc(ui("pages.photography.empty"))}</p>`;
+      $("#albums").innerHTML = `<p class="empty mono">${esc(ui("pages.photography.empty"))}</p>`;
       return;
     }
-    $("#filters").innerHTML = [
-      `<button type="button" data-f="all">${esc(ui("pages.photography.all"))}</button>`,
-      ...list.map((tr, ti) => `<button type="button" data-f="${ti}">${esc(tripLabel(tr))}</button>`),
-    ].join("");
-    $("#trips").innerHTML = list
-      .map(
-        (tr, ti) => `<section class="trip" data-trip="${ti}">
-          <header class="trip-head ${rv()}">
-            <span class="trip-date mono">${esc(tr.date)}</span>
-            <h2>${esc(t(tr.place))}</h2>
-            <span class="trip-count mono">${esc(ui("pages.photography.count").replace("{n}", tr.photos.length))}</span>
-          </header>
-          <div class="gallery">${tr.photos
-            .map(
-              (p, i) => `<figure class="shot ${p.ratio || ""}" data-trip="${ti}" data-i="${i}" tabindex="0" role="button">
-                <img src="${esc(ver(p.src))}" alt="${esc(photoCaption(tr, p))}" loading="lazy" />
-                <figcaption class="mono"><span>${esc(p.caption ? t(p.caption) : tripLabel(tr))}</span></figcaption>
-              </figure>`
-            )
-            .join("")}</div>
-        </section>`
-      )
-      .join("");
-    applyFilter();
-    if (lb?.classList.contains("open")) fillLightbox();
+    robots?.remove();
+    const { slug, n } = route();
+    const al = list.find((a) => a.slug === slug);
+    if (!al) {
+      // 相册列表
+      document.title = `${ui("pages.photography.title")} — ${ui("site.title")}`;
+      $("#albums").innerHTML = `<div class="album-grid">${list
+        .map((a) => {
+          const c = a.photos[a.cover] || a.photos[0];
+          return `<a class="album-card ${rv()}" href="#/${encodeURIComponent(a.slug)}">
+            <span class="album-cover">${imgTag(c, albumLabel(a))}</span>
+            <span class="album-meta"><span class="mono">${esc(a.date)}</span><h2>${esc(t(a.place))}</h2><span class="mono muted">${esc(countLabel(a.photos.length))}</span></span>
+          </a>`;
+        })
+        .join("")}</div>`;
+      closeLb(false);
+      return;
+    }
+    // 单个相册
+    document.title = `${albumLabel(al)} — ${ui("pages.photography.title")} — ${ui("site.title")}`;
+    $("#albums").innerHTML = `
+      <div class="album-head">
+        <a class="back mono" href="#/">${esc(ui("pages.photography.back"))}</a>
+        <p class="mono muted">${esc(al.date)} · ${esc(countLabel(al.photos.length))}</p>
+        <h2>${esc(t(al.place))}</h2>
+      </div>
+      <div class="gallery">${al.photos
+        .map(
+          (p, i) => `<figure class="shot" data-i="${i}" tabindex="0" role="button" aria-label="${esc(photoCaption(al, p))}">
+            ${imgTag(p, photoCaption(al, p))}
+            ${p.caption ? `<figcaption class="mono"><span>${esc(t(p.caption))}</span></figcaption>` : ""}
+          </figure>`
+        )
+        .join("")}</div>`;
+    if (n >= 1 && n <= al.photos.length) openLb(al, n - 1);
+    else closeLb(false);
   }
 
   const lb = $("#lightbox");
-  let lbTrip = -1, lbIndex = -1;
+  let lbAlbum = null, lbIndex = -1;
   function fillLightbox() {
-    const tr = trips()[lbTrip];
-    const p = tr?.photos[lbIndex];
+    const p = lbAlbum?.photos[lbIndex];
     if (!p) return;
-    const img = lb.querySelector("img");
-    img.src = ver(p.src);
-    img.alt = photoCaption(tr, p);
-    lb.querySelector(".lb-cap").textContent = `${photoCaption(tr, p)} · ${lbIndex + 1}/${tr.photos.length}`;
-  }
-  function bindPhotos() {
-    $("#filters").addEventListener("click", (e) => {
-      const b = e.target.closest("button");
-      if (!b) return;
-      activeTrip = b.dataset.f;
-      applyFilter();
+    const img = lb.querySelector(".lb-stage img");
+    img.src = ver(p.full || p.src);
+    img.alt = photoCaption(lbAlbum, p);
+    lb.querySelector(".lb-cap").textContent = `${photoCaption(lbAlbum, p)} · ${lbIndex + 1} / ${lbAlbum.photos.length}`;
+    // 预加载前后两张
+    [1, -1].forEach((d) => {
+      const q = lbAlbum.photos[(lbIndex + d + lbAlbum.photos.length) % lbAlbum.photos.length];
+      if (q) new Image().src = ver(q.full || q.src);
     });
+    history.replaceState(null, "", `${location.pathname}${location.search}#/${encodeURIComponent(lbAlbum.slug)}/${lbIndex + 1}`);
+  }
+  function openLb(al, i) {
+    lbAlbum = al; lbIndex = i;
+    fillLightbox();
+    lb.classList.add("open");
+    lb.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    lb.querySelector(".lb-close").focus();
+  }
+  function closeLb(restoreHash = true) {
+    if (!lb?.classList.contains("open")) return;
+    lb.classList.remove("open");
+    lb.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (restoreHash && lbAlbum) history.replaceState(null, "", `${location.pathname}${location.search}#/${encodeURIComponent(lbAlbum.slug)}`);
+    $(`.shot[data-i="${lbIndex}"]`)?.focus();
+  }
+  const step = (d) => {
+    const n = lbAlbum?.photos.length || 0;
+    if (!n) return;
+    lbIndex = (lbIndex + d + n) % n;
+    fillLightbox();
+  };
+
+  function bindPhotos() {
+    window.addEventListener("hashchange", renderPhotos);
     const openShot = (e) => {
       const s = e.target.closest(".shot");
-      if (!s) return;
-      lbTrip = Number(s.dataset.trip);
-      lbIndex = Number(s.dataset.i);
-      fillLightbox();
-      lb.classList.add("open");
-      lb.setAttribute("aria-hidden", "false");
-      lb.querySelector(".lb-close").focus();
+      const al = albums().find((a) => a.slug === route().slug);
+      if (s && al) openLb(al, Number(s.dataset.i));
     };
-    $("#trips").addEventListener("click", openShot);
-    $("#trips").addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openShot(e); }
+    $("#albums").addEventListener("click", openShot);
+    $("#albums").addEventListener("keydown", (e) => {
+      if ((e.key === "Enter" || e.key === " ") && e.target.closest(".shot")) { e.preventDefault(); openShot(e); }
     });
-    const closeLb = () => {
-      if (!lb.classList.contains("open")) return;
-      lb.classList.remove("open");
-      lb.setAttribute("aria-hidden", "true");
-      $(`.shot[data-trip="${lbTrip}"][data-i="${lbIndex}"]`)?.focus();
-    };
-    // 大图里用 ← → 在同一次旅行的照片之间切换
-    const step = (d) => {
-      const n = trips()[lbTrip]?.photos.length || 0;
-      if (!n) return;
-      lbIndex = (lbIndex + d + n) % n;
-      fillLightbox();
-    };
-    lb.addEventListener("click", closeLb);
+    lb.querySelector(".lb-prev").addEventListener("click", (e) => { e.stopPropagation(); step(-1); });
+    lb.querySelector(".lb-next").addEventListener("click", (e) => { e.stopPropagation(); step(1); });
+    lb.querySelector(".lb-stage").addEventListener("click", (e) => e.stopPropagation());
+    lb.addEventListener("click", () => closeLb());
     document.addEventListener("keydown", (e) => {
       if (!lb.classList.contains("open")) return;
       if (e.key === "Escape") closeLb();
       else if (e.key === "ArrowRight") step(1);
       else if (e.key === "ArrowLeft") step(-1);
+    });
+    // 手机：左右滑动切换
+    let x0 = null, y0 = null;
+    lb.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    lb.addEventListener("touchend", (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+      x0 = y0 = null;
     });
   }
 

@@ -11,6 +11,7 @@
 | 界面文字（导航、标题、按钮…） | `i18n.js` |
 | 样式 | `style.css` |
 | 首页点阵漩涡 | `art.js` |
+| 相册照片 | `photos/年-月-地点/`（见 `photos/README.md`） |
 
 文字字段可以写成一句通用文字，或 `{ zh, en, ja }` 三语对象。
 
@@ -20,4 +21,8 @@
 npx serve -l 5173 .
 ```
 
-然后打开 http://localhost:5173（`serve.json` 关闭了自动去掉 `.html` 的重定向，保证 `?lang=` 参数不丢）。
+预览前可运行 `node tools/build.mjs` 更新相册列表（albums.js）。然后打开 http://localhost:5173（`serve.json` 关闭了自动去掉 `.html` 的重定向，保证 `?lang=` 参数不丢）。
+
+## 部署
+
+推送到 `main` 后，GitHub Actions 运行 `tools/build.mjs`：缩放相册照片（去掉 EXIF/GPS）、生成 albums.js 与 sitemap.xml、给资源加版本号，然后发布到 https://kevinscsatoshi.github.io 。

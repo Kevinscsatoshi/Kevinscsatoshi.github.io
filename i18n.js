@@ -23,7 +23,7 @@ window.I18N = {
         timeline: "履历",
         selected: "代表项目",
       },
-      photography: { title: "摄影旅行", alt: "Photo & Travel", desc: "顾思聪（Kevin Sicong Gu）的摄影与旅行记录。", all: "全部", count: "{n} 张", empty: "照片整理中，敬请期待。" },
+      photography: { title: "摄影旅行", alt: "Photo & Travel", desc: "顾思聪（Kevin Sicong Gu）的摄影与旅行记录。", all: "全部", count: "{n} 张", back: "← 全部相册", empty: "照片整理中，敬请期待。" },
       projects: {
         title: "Vibe 项目",
         alt: "Vibe Projects",
@@ -43,7 +43,7 @@ window.I18N = {
     links: { visit: "访问", play: "试玩", site: "官网" },
     footer: { eyebrow: "联系我", made: "用心制作。" },
     notFound: { title: "页面不存在", text: "这个页面不存在，或已经移动。", home: "返回首页" },
-    lightbox: { close: "关闭 ✕" },
+    lightbox: { close: "关闭 ✕", prev: "上一张", next: "下一张" },
   },
 
   en: {
@@ -65,7 +65,7 @@ window.I18N = {
         timeline: "Timeline",
         selected: "Selected Work",
       },
-      photography: { title: "Photo & Travel", alt: "", desc: "Kevin Sicong Gu's photography and travels.", all: "All", count: "{n} photos", empty: "Photos coming soon." },
+      photography: { title: "Photo & Travel", alt: "", desc: "Kevin Sicong Gu's photography and travels.", all: "All", count: "{n} photos", back: "← All albums", empty: "Photos coming soon." },
       projects: {
         title: "Vibe Projects",
         alt: "",
@@ -85,7 +85,7 @@ window.I18N = {
     links: { visit: "Visit", play: "Play", site: "Website" },
     footer: { eyebrow: "Get in touch", made: "Made with care." },
     notFound: { title: "Page not found", text: "This page doesn't exist or has moved.", home: "Back to home" },
-    lightbox: { close: "Close ✕" },
+    lightbox: { close: "Close ✕", prev: "Previous photo", next: "Next photo" },
   },
 
   ja: {
@@ -107,7 +107,7 @@ window.I18N = {
         timeline: "経歴一覧",
         selected: "主な実績",
       },
-      photography: { title: "写真と旅", alt: "Photo & Travel", desc: "顧 思聡（Kevin Sicong Gu）の写真と旅の記録。", all: "すべて", count: "{n} 枚", empty: "写真は準備中です。" },
+      photography: { title: "写真と旅", alt: "Photo & Travel", desc: "顧 思聡（Kevin Sicong Gu）の写真と旅の記録。", all: "すべて", count: "{n} 枚", back: "← アルバム一覧", empty: "写真は準備中です。" },
       projects: {
         title: "Vibe プロジェクト",
         alt: "Vibe Projects",
@@ -127,6 +127,6 @@ window.I18N = {
     links: { visit: "サイトへ", play: "プレイ", site: "公式サイト" },
     footer: { eyebrow: "お問い合わせ", made: "心を込めてつくりました。" },
     notFound: { title: "ページが見つかりません", text: "お探しのページは存在しないか、移動した可能性があります。", home: "トップページへ" },
-    lightbox: { close: "閉じる ✕" },
+    lightbox: { close: "閉じる ✕", prev: "前の写真", next: "次の写真" },
   },
 };
