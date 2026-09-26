@@ -39,11 +39,17 @@
     </header>
     <!-- 飞行地球（globe.js）：数据来自 Flighty 导出（flights.js） -->
     <section class="travel reveal" id="travel" aria-label="Flights">
+      <p class="travel-headline" id="travel-headline"></p>
       <div class="travel-tabs mono" id="travel-tabs" role="tablist"></div>
       <div class="globe-wrap">
         <canvas id="globe" aria-hidden="true"></canvas>
         <div class="globe-tip mono" id="globe-tip" hidden></div>
         <p class="globe-hint mono" data-i18n="travel.hint"></p>
+      </div>
+      <!-- 人生至今的旅行：出生到今天，每年一列，每个点 = 一次航班 -->
+      <div class="life" id="life">
+        <p class="life-title mono" data-i18n="travel.life"></p>
+        <div class="life-chart" id="life-chart"></div>
       </div>
       <dl class="travel-stats" id="travel-stats"></dl>
       <p class="travel-note mono" id="travel-note"></p>

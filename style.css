@@ -291,6 +291,44 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
 .travel-stats dd small { font-size: 0.45em; font-family: var(--sans); color: var(--muted); }
 .travel-stats .sub { display: block; font-size: 0.72rem; color: var(--muted); margin-top: 6px; text-transform: none; }
 .travel-note { color: var(--muted); margin-top: 14px; text-transform: none; }
+/* 人生至今的旅行 */
+.travel-headline {
+  font-family: var(--serif); font-size: clamp(1.6rem, 3.6vw, 2.8rem); line-height: 1.2;
+  margin-bottom: 26px; max-width: 900px;
+}
+.life { margin-top: 44px; }
+.life-title { color: var(--muted); margin-bottom: 14px; }
+.life-chart {
+  --h: 150px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 3px;
+  height: calc(var(--h) + 30px); align-items: end; padding-top: 30px; margin-bottom: 34px;
+}
+.life-col {
+  position: relative; height: var(--h); display: flex; flex-direction: column; justify-content: flex-end;
+  cursor: pointer; padding: 0; border: 0; background: none; transition: opacity .2s;
+}
+.life-col.life-none { cursor: default; }
+.life-zero { display: block; height: 1px; background: var(--line); }
+.life-bar {
+  display: block; width: 100%; border-radius: 1px;
+  background-image: radial-gradient(circle, var(--accent) 1.1px, transparent 1.4px);
+  background-size: 5px 5px; background-position: center bottom;
+  transition: filter .2s, opacity .2s;
+}
+.life-col:not(.life-none):hover .life-bar, .life-col.active .life-bar {
+  background-image: radial-gradient(circle, var(--fg) 1.3px, transparent 1.6px);
+}
+.life-chart.has-active .life-col:not(.active) { opacity: 0.45; }
+.life-age {
+  position: absolute; left: 50%; top: calc(100% + 8px); translate: -50% 0;
+  color: var(--muted); font-size: 0.66rem; white-space: nowrap; text-transform: none;
+}
+.life-mark {
+  position: absolute; left: 50%; bottom: calc(100% + 6px); translate: -50% 0;
+  color: var(--fg); font-size: 0.66rem; white-space: nowrap; text-transform: none; pointer-events: none;
+}
+.life-col:first-child .life-age { translate: 0 0; left: 0; }
+.life-col:last-child .life-mark, .life-col:last-child .life-age { translate: 0 0; left: auto; right: 0; }
 .lb-loc { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; color: var(--muted); text-transform: none; border-bottom: 1px solid var(--line); z-index: 2; }
 .lb-loc:hover { color: var(--fg); border-color: var(--fg); }
 

@@ -215,6 +215,15 @@
   const imgTag = (p, alt, cls = "") =>
     `<img src="${esc(ver(p.src))}"${p.w && p.h ? ` width="${p.w}" height="${p.h}"` : ""} alt="${esc(alt)}" loading="lazy" decoding="async"${cls ? ` class="${cls}"` : ""} />`;
 
+  /* ---------- 年龄：按东京时间，每年生日（S.born）自动加一岁 ---------- */
+  const tokyoToday = () =>
+    new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+  function ageOn(day = tokyoToday()) {
+    if (!S.born) return null;
+    const [by, bm, bd] = S.born.split("-").map(Number), [y, m, d] = day.split("-").map(Number);
+    return y - by - (m < bm || (m === bm && d < bd) ? 1 : 0);
+  }
+
   /* ---------- 飞行地球 + 统计（数据来自 Flighty） ---------- */
   let globe = null, travelYear = "all";
   const fmtNum = (n) => Number(n).toLocaleString(HTML_LANG[lang]);
@@ -241,12 +250,14 @@
       item("countries", fmtNum(st.countries)),
     ].join("");
     $("#travel-note").textContent = tr("source").replace("{date}", F.updated);
+    renderLife(tr, F);
     const pins = albums().filter((a) => a.location).map((a) => ({
       lat: a.location[0], lon: a.location[1], slug: a.slug,
       label: t(a.place), tip: `${albumLabel(a)} · ${countLabel(a.photos.length)} →`,
     }));
     if (!globe) {
       globe = TG.mount($("#globe"), { tip: $("#globe-tip"), onPin: (p) => { location.hash = `#/${encodeURIComponent(p.slug)}`; } });
+      bindLife();
       $("#travel-tabs").addEventListener("click", (e) => {
         const b = e.target.closest("button");
         if (!b) return;
@@ -256,6 +267,44 @@
       });
     }
     globe.setPins(pins);
+  }
+
+  // 人生至今的旅行：出生年到今年，每年一列，柱高 = 当年航班数；点击某年切换地球
+  function renderLife(tr, F) {
+    const chart = $("#life-chart");
+    if (!chart || !S.born) { $("#life")?.remove(); return; }
+    const age = ageOn(), all = window.TravelGlobe.statsFor("all");
+    $("#travel-headline").textContent = tr("headline").replace("{age}", age).replace("{flights}", fmtNum(all.flights)).replace("{countries}", fmtNum(all.countries));
+    const born = Number(S.born.slice(0, 4)), now = Number(tokyoToday().slice(0, 4));
+    const count = {};
+    F.flights.forEach((f) => { count[f[2]] = (count[f[2]] || 0) + 1; });
+    const max = Math.max(1, ...Object.values(count));
+    const first = Math.min(...F.flights.map((f) => f[2]));
+    const years = Array.from({ length: now - born + 1 }, (_, i) => born + i);
+    const tip = (y) => tr("yearTip").replace("{year}", y).replace("{age}", y - born).replace("{n}", count[y] || 0);
+    chart.innerHTML = years
+      .map((y) => {
+        const n = count[y] || 0, a = y - born;
+        const label = a % 5 === 0 || y === now ? `<span class="life-age mono">${esc(tr("age").replace("{n}", a))}</span>` : "";
+        const mark = y === first ? tr("first").replace("{age}", a) : y === now ? tr("now").replace("{age}", age) : "";
+        return `<button type="button" class="life-col${n ? "" : " life-none"}${travelYear === y ? " active" : ""}" data-y="${y}"${n ? "" : ' aria-disabled="true" tabindex="-1"'} title="${esc(tip(y))}" aria-label="${esc(tip(y))}">
+          ${mark ? `<span class="life-mark mono">${esc(mark)}</span>` : ""}
+          ${n ? `<span class="life-bar" style="height:${Math.max(4, (n / max) * 100)}%"></span>` : '<span class="life-zero"></span>'}
+          ${label}
+        </button>`;
+      })
+      .join("");
+    chart.classList.toggle("has-active", travelYear !== "all");
+  }
+  function bindLife() {
+    $("#life-chart")?.addEventListener("click", (e) => {
+      const b = e.target.closest(".life-col");
+      if (!b || b.classList.contains("life-none")) return;
+      const y = Number(b.dataset.y);
+      travelYear = travelYear === y ? "all" : y;           // 再点一次回到全部
+      globe?.setYear(travelYear);
+      renderTravel();
+    });
   }
 
   function renderPhotos() {

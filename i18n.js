@@ -41,6 +41,8 @@ window.I18N = {
       },
     },
     travel: {
+      life: "人生至今的旅行", headline: "{age} 年人生 · {flights} 次航班 · {countries} 个国家和地区",
+      age: "{n} 岁", first: "第一次飞行 · {age} 岁", now: "现在 · {age} 岁", yearTip: "{year} · {age} 岁 · {n} 次航班", none: "没有航班",
       all: "全部", flights: "航班", distance: "飞行里程", time: "空中时间", airports: "机场", airlines: "航空公司", countries: "国家和地区",
       laps: "≈ 绕地球 {n} 圈", days: "{d} 天 {h} 小时", source: "数据来自 Flighty · 更新于 {date}",
       hint: "拖动旋转 · 点击图钉打开相册", map: "📍 地图",
@@ -92,6 +94,8 @@ window.I18N = {
       },
     },
     travel: {
+      life: "A life in flights, so far", headline: "{age} years · {flights} flights · {countries} countries & regions",
+      age: "age {n}", first: "First flight · age {age}", now: "Now · age {age}", yearTip: "{year} · age {age} · {n} flights", none: "no flights",
       all: "All-time", flights: "Flights", distance: "Distance", time: "Time in the air", airports: "Airports", airlines: "Airlines", countries: "Countries & regions",
       laps: "≈ {n}× around the Earth", days: "{d}d {h}h", source: "Data from Flighty · updated {date}",
       hint: "Drag to rotate · click a pin to open the album", map: "📍 Map",
@@ -143,6 +147,8 @@ window.I18N = {
       },
     },
     travel: {
+      life: "これまでの人生の旅", headline: "{age} 年の人生 · {flights} フライト · {countries} の国・地域",
+      age: "{n} 歳", first: "初フライト · {age} 歳", now: "現在 · {age} 歳", yearTip: "{year} · {age} 歳 · {n} フライト", none: "フライトなし",
       all: "全期間", flights: "フライト", distance: "飛行距離", time: "飛行時間", airports: "空港", airlines: "航空会社", countries: "国・地域",
       laps: "≈ 地球 {n} 周分", days: "{d}日 {h}時間", source: "データ：Flighty · {date} 更新",
       hint: "ドラッグで回転 · ピンをクリックでアルバムへ", map: "📍 地図",
