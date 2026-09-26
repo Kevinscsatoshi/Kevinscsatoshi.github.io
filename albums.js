@@ -9,6 +9,10 @@ window.ALBUMS = [
    "ja": "モスクワ"
   },
   "cover": 5,
+  "location": [
+   55.7818,
+   37.6594
+  ],
   "photos": [
    {
     "src": "photos/2024-12-moscow/01.jpg",
@@ -80,13 +84,21 @@ window.ALBUMS = [
     "src": "photos/2024-12-moscow/12.jpg",
     "full": "photos/2024-12-moscow/12.jpg",
     "w": 1500,
-    "h": 2000
+    "h": 2000,
+    "gps": [
+     55.7816,
+     37.61394
+    ]
    },
    {
     "src": "photos/2024-12-moscow/13.jpg",
     "full": "photos/2024-12-moscow/13.jpg",
     "w": 1500,
-    "h": 2000
+    "h": 2000,
+    "gps": [
+     55.78195,
+     37.70486
+    ]
    }
   ]
  }

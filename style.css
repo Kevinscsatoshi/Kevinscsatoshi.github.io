@@ -258,6 +258,42 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
 .filters button:hover { color: var(--fg); }
 .filters button.active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 
+/* 飞行地球 */
+.travel { margin-bottom: clamp(64px, 9vw, 110px); }
+.travel[hidden] { display: none; }
+.travel-tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; margin-bottom: 18px; }
+.travel-tabs::-webkit-scrollbar { display: none; }
+.travel-tabs button {
+  flex: 0 0 auto; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); transition: .2s;
+}
+.travel-tabs button:hover { color: var(--fg); }
+.travel-tabs button.active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.globe-wrap {
+  position: relative; aspect-ratio: 16 / 10; max-height: 640px; width: 100%;
+  border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 45%, #1d1c1a 0%, #141414 70%);
+}
+.globe-wrap canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
+.globe-wrap canvas:active { cursor: grabbing; }
+.globe-tip {
+  position: absolute; z-index: 2; pointer-events: none; white-space: nowrap; text-transform: none;
+  transform: translate(12px, -130%); padding: 5px 10px; border-radius: 999px;
+  background: rgba(241, 236, 226, 0.95); color: #141414;
+}
+.globe-hint { position: absolute; left: 14px; bottom: 12px; color: var(--muted); text-transform: none; pointer-events: none; }
+.travel-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.travel-stats > div { padding: 18px 16px 20px 0; border-bottom: 1px solid var(--line); }
+.travel-stats dt { color: var(--muted); }
+.travel-stats dd { font-family: var(--serif); font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.05; margin-top: 8px; }
+.travel-stats dd small { font-size: 0.45em; font-family: var(--sans); color: var(--muted); }
+.travel-stats .sub { display: block; font-size: 0.72rem; color: var(--muted); margin-top: 6px; text-transform: none; }
+.travel-note { color: var(--muted); margin-top: 14px; text-transform: none; }
+.lb-loc { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; color: var(--muted); text-transform: none; border-bottom: 1px solid var(--line); z-index: 2; }
+.lb-loc:hover { color: var(--fg); border-color: var(--fg); }
+
 /* 相册列表 */
 .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: clamp(20px, 3vw, 36px); }
 .album-card { display: block; }
@@ -437,6 +473,10 @@ p, h1, h2, h3, h4 { text-wrap: pretty; }
 }
 /* 手机：导航链接换到第二行 */
 @media (max-width: 720px) {
+  .globe-wrap { aspect-ratio: 1 / 1; }
+  .travel-stats { grid-template-columns: repeat(2, 1fr); }
+  .globe-hint { display: none; }
+  .lb-loc { bottom: 76px; }
   .nav { flex-wrap: wrap; row-gap: 12px; }
   .nav nav { order: 3; width: 100%; justify-content: space-between; gap: 12px; overflow-x: auto; scrollbar-width: none; }
   .nav nav::-webkit-scrollbar { display: none; }

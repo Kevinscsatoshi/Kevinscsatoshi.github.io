@@ -7,7 +7,8 @@
 //      {
 //        "place": { "zh": "俄罗斯", "en": "Russia", "ja": "ロシア" },
 //        "cover": "05.jpg",
-//        "captions": { "05.jpg": { "zh": "莫斯科", "en": "Moscow", "ja": "モスクワ" } }
+//        "captions": { "05.jpg": { "zh": "莫斯科", "en": "Moscow", "ja": "モスクワ" } },
+//        "location": [55.7558, 37.6173]   ← 可选；不写则用照片里 GPS 的平均位置（显示在旅行地球上）
 //      }
 //
 //  用法：
@@ -68,6 +69,38 @@ function exifOrientation(b, t) {
   return 0;
 }
 
+/* ---------- 读取照片的 GPS（EXIF）；返回 [纬度, 经度] 或 null ---------- */
+function exifGps(file) {
+  const b = fs.readFileSync(file);
+  if (b[0] !== 0xff || b[1] !== 0xd8) return null;
+  let i = 2;
+  while (i < b.length - 4) {
+    if (b[i] !== 0xff) { i++; continue; }
+    const m = b[i + 1], len = b.readUInt16BE(i + 2);
+    if (m === 0xe1 && b.toString("ascii", i + 4, i + 8) === "Exif") return parseGps(b, i + 10);
+    if (m === 0xda) break;
+    i += 2 + len;
+  }
+  return null;
+}
+function parseGps(b, t) {
+  const le = b.toString("ascii", t, t + 2) === "II";
+  const u16 = (o) => (le ? b.readUInt16LE(o) : b.readUInt16BE(o));
+  const u32 = (o) => (le ? b.readUInt32LE(o) : b.readUInt32BE(o));
+  const tags = (ifd) => { const n = u16(ifd), out = {}; for (let k = 0; k < n; k++) { const e = ifd + 2 + k * 12; out[u16(e)] = e; } return out; };
+  const ifd0 = tags(t + u32(t + 4));
+  if (!ifd0[0x8825]) return null;
+  const g = tags(t + u32(ifd0[0x8825] + 8));
+  const rat3 = (e) => { const o = t + u32(e + 8); return [0, 1, 2].map((k) => u32(o + k * 8) / u32(o + k * 8 + 4)); };
+  const ref = (e) => String.fromCharCode(b[e + 8]);
+  if (!g[2] || !g[4]) return null;
+  const dms = ([d, m, s]) => d + m / 60 + s / 3600;
+  let lat = dms(rat3(g[2])), lon = dms(rat3(g[4]));
+  if (g[1] && ref(g[1]) === "S") lat = -lat;
+  if (g[3] && ref(g[3]) === "W") lon = -lon;
+  return Number.isFinite(lat) && Number.isFinite(lon) ? [Number(lat.toFixed(5)), Number(lon.toFixed(5))] : null;
+}
+
 /* ---------- 相册 ---------- */
 const titleCase = (s) => s.replace(/[-_]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()).trim();
 
@@ -97,6 +130,7 @@ async function buildAlbums() {
     for (const f of files) {
       const src = path.join(dir, f);
       const caption = meta.captions?.[f];
+      const gps = exifGps(src);
       if (sharp) {
         const base = path.join("photos", slug, outName(f));
         const outDir = path.join(OUT, "photos", slug);
@@ -104,18 +138,23 @@ async function buildAlbums() {
         const img = () => sharp(src).rotate();                   // 按 EXIF 自动旋转；输出不带 EXIF/GPS
         const full = await img().resize({ width: SIZES.full, height: SIZES.full, fit: "inside", withoutEnlargement: true }).webp({ quality: 82 }).toFile(path.join(OUT, `${base}-${SIZES.full}.webp`));
         await img().resize({ width: SIZES.thumb, height: SIZES.thumb, fit: "inside", withoutEnlargement: true }).webp({ quality: 78 }).toFile(path.join(OUT, `${base}-${SIZES.thumb}.webp`));
-        photos.push({ file: f, src: `${base}-${SIZES.thumb}.webp`, full: `${base}-${SIZES.full}.webp`, w: full.width, h: full.height, ...(caption && { caption }) });
+        photos.push({ file: f, src: `${base}-${SIZES.thumb}.webp`, full: `${base}-${SIZES.full}.webp`, w: full.width, h: full.height, ...(caption && { caption }), ...(gps && { gps }) });
       } else {
         const { w, h } = imageSize(src);
-        photos.push({ file: f, src: `photos/${slug}/${f}`, full: `photos/${slug}/${f}`, w, h, ...(caption && { caption }) });
+        photos.push({ file: f, src: `photos/${slug}/${f}`, full: `photos/${slug}/${f}`, w, h, ...(caption && { caption }), ...(gps && { gps }) });
       }
     }
     const coverIdx = Math.max(0, photos.findIndex((p) => p.file === meta.cover));
+    const withGps = photos.filter((p) => p.gps);
+    const location = meta.location || (withGps.length
+      ? [0, 1].map((k) => Number((withGps.reduce((sum, p) => sum + p.gps[k], 0) / withGps.length).toFixed(4)))
+      : null);
     albums.push({
       slug,
       date: meta.date || (m ? `${m[1]}/${m[2]}` : ""),
       place: meta.place || titleCase(m ? m[3] : slug),
       cover: coverIdx,
+      ...(location && { location }),
       photos: photos.map(({ file, ...p }) => p),
     });
     console.log(`album ${slug}: ${photos.length} photos`);

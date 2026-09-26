@@ -215,6 +215,49 @@
   const imgTag = (p, alt, cls = "") =>
     `<img src="${esc(ver(p.src))}"${p.w && p.h ? ` width="${p.w}" height="${p.h}"` : ""} alt="${esc(alt)}" loading="lazy" decoding="async"${cls ? ` class="${cls}"` : ""} />`;
 
+  /* ---------- 飞行地球 + 统计（数据来自 Flighty） ---------- */
+  let globe = null, travelYear = "all";
+  const fmtNum = (n) => Number(n).toLocaleString(HTML_LANG[lang]);
+  function renderTravel() {
+    const TG = window.TravelGlobe, F = window.FLIGHTS;
+    const box = $("#travel");
+    if (!box || !TG || !F) { box?.remove(); return; }
+    const tr = (k) => ui(`travel.${k}`);
+    $("#travel-tabs").innerHTML = ["all", ...TG.years]
+      .map((y) => `<button type="button" role="tab" data-y="${y}" aria-selected="${y === travelYear}"${y === travelYear ? ' class="active"' : ""}>${y === "all" ? esc(tr("all")) : y}</button>`)
+      .join("");
+    const st = TG.statsFor(travelYear);
+    const laps = (st.km / 40075).toFixed(1);
+    const time = st.minutes
+      ? tr("days").replace("{d}", Math.floor(st.minutes / 1440)).replace("{h}", Math.floor((st.minutes % 1440) / 60))
+      : null;
+    const item = (k, v, sub = "") => `<div><dt class="mono">${esc(tr(k))}</dt><dd>${v}${sub ? `<span class="sub mono">${esc(sub)}</span>` : ""}</dd></div>`;
+    $("#travel-stats").innerHTML = [
+      item("flights", fmtNum(st.flights)),
+      item("distance", `${fmtNum(st.km)}<small> km</small>`, tr("laps").replace("{n}", laps)),
+      time ? item("time", esc(time)) : "",
+      item("airports", fmtNum(st.airports)),
+      item("airlines", fmtNum(st.airlines)),
+      item("countries", fmtNum(st.countries)),
+    ].join("");
+    $("#travel-note").textContent = tr("source").replace("{date}", F.updated);
+    const pins = albums().filter((a) => a.location).map((a) => ({
+      lat: a.location[0], lon: a.location[1], slug: a.slug,
+      label: t(a.place), tip: `${albumLabel(a)} · ${countLabel(a.photos.length)} →`,
+    }));
+    if (!globe) {
+      globe = TG.mount($("#globe"), { tip: $("#globe-tip"), onPin: (p) => { location.hash = `#/${encodeURIComponent(p.slug)}`; } });
+      $("#travel-tabs").addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (!b) return;
+        travelYear = b.dataset.y === "all" ? "all" : Number(b.dataset.y);
+        globe.setYear(travelYear);
+        renderTravel();
+      });
+    }
+    globe.setPins(pins);
+  }
+
   function renderPhotos() {
     const list = albums();
     let robots = $('meta[name="robots"]');
@@ -222,11 +265,15 @@
       if (!robots) { robots = document.createElement("meta"); robots.name = "robots"; document.head.appendChild(robots); }
       robots.content = "noindex";
       $("#albums").innerHTML = `<p class="empty mono">${esc(ui("pages.photography.empty"))}</p>`;
+      renderTravel();
       return;
     }
     robots?.remove();
     const { slug, n } = route();
     const al = list.find((a) => a.slug === slug);
+    const travel = $("#travel");
+    if (travel) travel.hidden = !!al;
+    if (!al) renderTravel();
     if (!al) {
       // 相册列表
       document.title = `${ui("pages.photography.title")} — ${ui("site.title")}`;
@@ -310,6 +357,15 @@
     img.src = ver(p.full || p.src);
     img.alt = photoCaption(lbAlbum, p);
     lb.querySelector(".lb-cap").textContent = `${photoCaption(lbAlbum, p)} · ${lbIndex + 1} / ${lbAlbum.photos.length}`;
+    const loc = lb.querySelector(".lb-loc");
+    if (loc) {
+      loc.hidden = !p.gps;
+      if (p.gps) {
+        const [la, lo] = p.gps;
+        loc.href = `https://www.openstreetmap.org/?mlat=${la}&mlon=${lo}#map=16/${la}/${lo}`;
+        loc.textContent = ui("travel.map");
+      }
+    }
     // 预加载前后两张
     [1, -1].forEach((d) => {
       const q = lbAlbum.photos[(lbIndex + d + lbAlbum.photos.length) % lbAlbum.photos.length];
@@ -354,6 +410,7 @@
     lb.querySelector(".lb-prev").addEventListener("click", (e) => { e.stopPropagation(); step(-1); });
     lb.querySelector(".lb-next").addEventListener("click", (e) => { e.stopPropagation(); step(1); });
     lb.querySelector(".lb-stage").addEventListener("click", (e) => e.stopPropagation());
+    lb.querySelector(".lb-loc")?.addEventListener("click", (e) => e.stopPropagation());
     lb.addEventListener("click", () => closeLb());
     document.addEventListener("keydown", (e) => {
       if (!lb.classList.contains("open")) return;

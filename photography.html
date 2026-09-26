@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- 静态默认值（English）：链接预览与爬虫读取这里；JS 会按语言替换 -->
-  <title>Photo &amp; Travel — Kevin Sicong Gu</title>
-  <meta name="description" content="Photography and travel by Kevin Sicong Gu." />
+  <title>Travel &amp; Photo — Kevin Sicong Gu</title>
+  <meta name="description" content="Kevin Sicong Gu's flights, travels and photo albums." />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Photo &amp; Travel — Kevin Sicong Gu" />
-  <meta property="og:description" content="Photography and travel by Kevin Sicong Gu." />
+  <meta property="og:title" content="Travel &amp; Photo — Kevin Sicong Gu" />
+  <meta property="og:description" content="Kevin Sicong Gu's flights, travels and photo albums." />
   <meta property="og:image" content="https://kevinscsatoshi.github.io/assets/portrait.png" />
   <link rel="alternate" hreflang="en" href="https://kevinscsatoshi.github.io/photography.html" />
   <link rel="alternate" hreflang="zh-CN" href="https://kevinscsatoshi.github.io/photography.html?lang=zh" />
@@ -34,9 +34,21 @@
 
   <main class="page">
     <header class="page-head reveal">
-      <h1 class="page-title"><span data-i18n="pages.photography.title">Photo &amp; Travel</span> <span class="alt" lang="en" data-i18n="pages.photography.alt"></span></h1>
+      <h1 class="page-title"><span data-i18n="pages.photography.title">Travel &amp; Photo</span> <span class="alt" lang="en" data-i18n="pages.photography.alt"></span></h1>
       <p class="page-intro" data-i18n="pages.photography.intro"></p>
     </header>
+    <!-- 飞行地球（globe.js）：数据来自 Flighty 导出（flights.js） -->
+    <section class="travel reveal" id="travel" aria-label="Flights">
+      <div class="travel-tabs mono" id="travel-tabs" role="tablist"></div>
+      <div class="globe-wrap">
+        <canvas id="globe" aria-hidden="true"></canvas>
+        <div class="globe-tip mono" id="globe-tip" hidden></div>
+        <p class="globe-hint mono" data-i18n="travel.hint"></p>
+      </div>
+      <dl class="travel-stats" id="travel-stats"></dl>
+      <p class="travel-note mono" id="travel-note"></p>
+    </section>
+
     <div id="albums"></div>
   </main>
 
@@ -49,11 +61,15 @@
     <figure class="lb-stage"><img alt="" /></figure>
     <button class="lb-nav lb-next" type="button" data-i18n-aria="lightbox.next" aria-label="Next">→</button>
     <p class="lb-cap mono"></p>
+    <a class="lb-loc mono" target="_blank" rel="noopener" hidden></a>
   </div>
 
   <script src="i18n.js?v=dev"></script>
   <script src="content.js?v=dev"></script>
   <script src="albums.js?v=dev"></script>
+  <script src="flights.js?v=dev"></script>
+  <script src="assets/globe-land.js?v=dev"></script>
+  <script src="globe.js?v=dev"></script>
   <script src="main.js?v=dev"></script>
 </body>
 </html>
